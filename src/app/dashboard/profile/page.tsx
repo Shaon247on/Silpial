@@ -1,9 +1,12 @@
-import React from 'react'
+import ProfileSettings from "@/components/dashboard/profile/ProfileSetting";
+import React from "react";
 
 function page() {
   return (
-    <div>page</div>
-  )
+    <div>
+      <ProfileSettings />
+    </div>
+  );
 }
 
-export default page
+export default page;

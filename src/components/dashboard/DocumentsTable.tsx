@@ -13,6 +13,7 @@ import {
 import { Document } from "@/types/Document.type";
 import ComplianceScore from "../elements/ComplianceScore";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface DocumentsTableProps {
   documents: Document[];
@@ -49,9 +50,11 @@ export default function DocumentsTable({
     >
       <div className="px-6 py-5 border-b border-gray-100 flex items-center justify-between">
         <h2 className="text-base font-semibold text-[#07172D]">{title}</h2>
+        <Link href={"/dashboard/documents"}>
         <Button className="bg-[#07172D]">
           View All
         </Button>
+        </Link>
       </div>
 
       <div className="overflow-x-auto">

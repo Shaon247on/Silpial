@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Activity, BookOpen, X } from "lucide-react";
+import { Home, Activity, BookOpen, X, DockIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
@@ -15,7 +15,7 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { label: "Home", href: "/dashboard", icon: Home },
-  { label: "History", href: "/dashboard/history", icon: Activity },
+  { label: "Documents", href: "/dashboard/documents", icon: DockIcon },
   { label: "Legal References", href: "/dashboard/legal", icon: BookOpen },
 ];
 
