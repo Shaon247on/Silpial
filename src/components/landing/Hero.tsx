@@ -369,7 +369,6 @@ export default function Hero() {
             <Button
               variant="outline"
               size="lg"
-              className="border-white/20 text-white hover:bg-white/10 hover:border-white/30 bg-transparent px-8 py-3 text-sm font-semibold transition-all duration-200"
             >
               How it works
             </Button>

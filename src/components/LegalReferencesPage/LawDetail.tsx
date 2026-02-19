@@ -19,7 +19,7 @@ export default function LawDetail({ reference, onClose }: LawDetailProps) {
       className="flex flex-col h-full"
     >
       {/* Header */}
-      <div className="flex items-start justify-between gap-4 mb-4">
+      <div className="flex flex-col-reverse md:flex-row items-start justify-between gap-4 mb-4">
         <div className="flex-1 min-w-0">
           <h2
             className="text-base font-bold leading-snug"
@@ -29,7 +29,7 @@ export default function LawDetail({ reference, onClose }: LawDetailProps) {
           </h2>
           <div className="flex items-center gap-1.5 mt-2">
             <svg
-              className="w-3.5 h-3.5 flex-shrink-0"
+              className="w-3.5 h-3.5 shrink-0"
               style={{ color: "#9CA3AF" }}
               fill="none"
               stroke="currentColor"
@@ -45,7 +45,7 @@ export default function LawDetail({ reference, onClose }: LawDetailProps) {
         </div>
 
         {/* Action buttons */}
-        <div className="flex items-center gap-2 flex-shrink-0">
+        <div className="flex items-center justify-end w-full md:w-auto gap-2 shrink-0">
           {/* Download */}
           <button
             className="w-9 h-9 rounded-lg border border-gray-200 flex items-center justify-center text-gray-400 hover:text-[#07162D] hover:border-[#07162D] transition-colors duration-200"
