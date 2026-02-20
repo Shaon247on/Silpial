@@ -66,7 +66,7 @@ export default function AiCheckingDocPage() {
         transition={{ duration: 0.4 }}
         className="mb-8"
       >
-        <h1 className="text-2xl font-bold text-[#07172D]">Analyze your document</h1>
+        <h1 className="text-2xl font-bold text-[#07172D]">Analiza tu documento</h1>
         <p className="mt-1 text-sm text-[#4A5565]">
           This process typically takes 2–3 minutes for standard tender documents.
         </p>

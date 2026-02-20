@@ -40,7 +40,7 @@ export function VersionCard({
           }`}
         >
           <Check className="w-4 h-4" />
-          {selected ? "Accepted ✓" : acceptLabel}
+          {selected ? "Aceptado ✓" : acceptLabel}
         </button>
       </div>
     </motion.div>

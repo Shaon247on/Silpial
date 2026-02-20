@@ -29,23 +29,23 @@ export default function NavBar() {
   const navLinks = [
     {
       link: "/",
-      title: "Home",
+      title: "Inicio",
     },
     {
       link: "/how-it-works",
-      title: "How It Works",
+      title: "Cómo Funciona",
     },
     {
       link: "/legal-referances",
-      title: "Legal Reference",
+      title: "Referencia Legal",
     },
     {
       link: "/faq",
-      title: "FAQ",
+      title: "Preguntas Frecuentes",
     },
     {
       link: "/contact-us",
-      title: "Contact Us",
+      title: "Contáctanos",
     },
   ];
 
@@ -149,7 +149,7 @@ export default function NavBar() {
                     size="sm"
                     variant={scrolled ? "default" : "destructive"}
                   >
-                    Get Started
+                    Empezar
                   </Button>
                 </Link>
               </motion.div>
@@ -250,7 +250,7 @@ export default function NavBar() {
               </Link>
               <Link href="/register" onClick={() => setMobileOpen(false)}>
                 <Button className="bg-red-600 hover:bg-red-700 text-white border-0 w-40">
-                  Get Started
+                  Empezar
                 </Button>
               </Link>
             </div>

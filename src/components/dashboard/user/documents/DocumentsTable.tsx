@@ -36,7 +36,7 @@ export default function DocumentsTable() {
   return (
     <div className="max-w-480 mx-auto">
       {/* Header */}
-      <PageHeader subtitle="A complete record of all actions and decisions for accountability and transparency" showCreateButton={true} title="Documents"/>
+      <PageHeader subtitle="Un registro completo de todas las acciones y decisiones para responsabilidad y transparencia" showCreateButton={true} title="Documentos"/>
 
       {/* Info Banner */}
       <motion.div
@@ -47,8 +47,8 @@ export default function DocumentsTable() {
         className="mb-6"
       >
         <LawAlert
-          title="Full Activity Traceability"
-          subtitle="All system activities and user decisions are captured to ensure full traceability and oversight."
+          title="Trazabilidad Completa de Actividades"
+          subtitle="Todas las actividades del sistema y decisiones del usuario se capturan para garantizar la trazabilidad completa y supervisión."
         />
       </motion.div>
 
@@ -71,11 +71,11 @@ export default function DocumentsTable() {
             <thead>
               <tr className="border-b border-gray-100 bg-gray-50">
                 {[
-                  "DOCUMENT",
-                  "SECTIONS",
-                  "LAST MODIFIED",
-                  "Compliance Score",
-                  "ACTIONS",
+                  "DOCUMENTO",
+                  "SECCIONES",
+                  "ÚLTIMA MODIFICACIÓN",
+                  "Puntuación de Conformidad",
+                  "ACCIONES",
                 ].map((h) => (
                   <th
                     key={h}
@@ -123,7 +123,7 @@ export default function DocumentsTable() {
                       }
                       className="text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors"
                     >
-                      View
+                      Ver
                     </button>
                   </td>
                 </motion.tr>

@@ -83,7 +83,7 @@ export default function RequireReviewPage() {
           <StatusBadge status={clause.status} />
         </div>
         <p className="text-sm text-[#4A5565]">
-          Review AI suggestions and make your decision.
+          Revisa las sugerencias de IA y toma tu decisión.
         </p>
       </motion.div>
 
@@ -97,8 +97,8 @@ export default function RequireReviewPage() {
         <div className="flex items-start gap-3 px-4 py-3.5 rounded-xl border border-blue-200 bg-blue-50 text-blue-700 text-sm mb-6">
           <Info className="w-4 h-4 mt-0.5 shrink-0" />
           <span>
-            All suggestions require your explicit approval. You can accept,
-            edit, or reject each suggestion.
+            Todas las sugerencias requieren tu aprobación explícita. Puedes aceptar,
+            editar o rechazar cada sugerencia.
           </span>
         </div>
       </motion.div>
@@ -117,21 +117,21 @@ export default function RequireReviewPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               {/* AI Generated */}
               <VersionCard
-                label="AI generated version"
+                label="Versión generada por IA"
                 text={
-                  clause.aiGenerated || "(No current text found in document)"
+                  clause.aiGenerated || "(No se encontró texto actual en el documento)"
                 }
                 selected={selectedVersion === "generated"}
                 onAccept={() => handleAccept("generated")}
-                acceptLabel="Accept"
+                acceptLabel="Aceptar"
               />
               {/* AI Suggested */}
               <VersionCard
-                label="AI-suggested version"
+                label="Versión sugerida por IA"
                 text={clause.aiSuggested}
                 selected={selectedVersion === "suggested"}
                 onAccept={() => handleAccept("suggested")}
-                acceptLabel="Proceed"
+                acceptLabel="Continuar"
               />
             </div>
 
@@ -142,7 +142,7 @@ export default function RequireReviewPage() {
                 className="px-5 py-2.5 rounded-lg border border-gray-200 bg-white text-sm font-medium text-[#07172D] hover:bg-gray-50 transition-colors"
               >
                 <X className="w-4 h-4 inline mr-1.5" />
-                Cancel
+                Cancelar
               </button>
               <button
                 onClick={() => {
@@ -152,7 +152,7 @@ export default function RequireReviewPage() {
                 className="px-5 py-2.5 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-colors flex items-center gap-2"
               >
                 <Pencil className="w-4 h-4" />
-                Edit manually
+                Editar manualmente
               </button>
             </div>
           </motion.div>
@@ -199,7 +199,7 @@ export default function RequireReviewPage() {
             {/* Edit manually section */}
             <div className="mb-6">
               <h3 className="text-base font-semibold text-[#07172D] mb-3">
-                Edit manually
+                Editar manualmente
               </h3>
               <textarea
                 value={manualText}
@@ -215,7 +215,7 @@ export default function RequireReviewPage() {
                 onClick={() => setMode("comparison")}
                 className="px-5 py-2.5 rounded-lg border border-gray-200 bg-white text-sm font-medium text-[#07172D] hover:bg-gray-50 transition-colors"
               >
-                Cancel
+                Cancelar
               </button>
               <button
                 onClick={handleSave}
@@ -225,12 +225,12 @@ export default function RequireReviewPage() {
                 {saved ? (
                   <>
                     <Check className="w-4 h-4" />
-                    Saved!
+                    ¡Guardado!
                   </>
                 ) : (
                   <>
                     <Save className="w-4 h-4" />
-                    Save changes
+                    Guardar cambios
                   </>
                 )}
               </button>

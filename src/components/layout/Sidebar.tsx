@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Activity, BookOpen, X, DockIcon } from "lucide-react";
+import { Home, Activity, BookOpen, X, DockIcon, User, Tag } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
@@ -14,9 +14,15 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { label: "Home", href: "/dashboard", icon: Home },
-  { label: "Documents", href: "/dashboard/documents", icon: DockIcon },
-  { label: "Legal References", href: "/dashboard/legal", icon: BookOpen },
+  { label: "Inicio", href: "/dashboard", icon: Home },
+  { label: "Documentos", href: "/dashboard/documents", icon: DockIcon },
+  { label: "Referencias Legales", href: "/dashboard/legal", icon: BookOpen },
+];
+const adminNav: NavItem[] = [
+  { label: "Inicio", href: "/admin", icon: Home },
+  { label: "Usuarios", href: "/admin/users", icon: User },
+  { label: "Referencias Legales", href: "/admin/legal", icon: BookOpen },
+  { label: "Categoría", href: "/admin/category-management", icon: Tag },
 ];
 
 interface SidebarProps {
@@ -26,32 +32,64 @@ interface SidebarProps {
 
 function SidebarContent({ onClose }: { onClose?: () => void }) {
   const pathname = usePathname();
-
+  const isAdmin = true;
   return (
     <nav className="flex flex-col gap-1 p-4 pt-6">
-      {navItems.map((item) => {
-        const Icon = item.icon;
-        const isActive =
-          pathname === item.href ||
-          (item.href !== "/dashboard" && pathname.startsWith(item.href));
+      {isAdmin ? (
+        <>
+          {adminNav.map((item) => {
+            const Icon = item.icon;
+            const isActive =
+              pathname === item.href ||
+              (item.href !== "/admin" && pathname.startsWith(item.href));
 
-        return (
-          <Link
-            key={item.href}
-            href={item.href}
-            onClick={onClose}
-            className={cn(
-              "flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200",
-              isActive
-                ? "bg-[#07172D] text-white"
-                : "text-gray-600 hover:bg-gray-100 hover:text-[#07172D]",
-            )}
-          >
-            <Icon className="w-5 h-5 shrink-0" />
-            <span>{item.label}</span>
-          </Link>
-        );
-      })}
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={onClose}
+                className={cn(
+                  "flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200",
+                  isActive
+                    ? "bg-[#07172D] text-white"
+                    : "text-gray-600 hover:bg-gray-100 hover:text-[#07172D]",
+                )}
+              >
+                <Icon className="w-5 h-5 shrink-0" />
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
+        </>
+      ) : (
+        <>
+          <>
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive =
+                pathname === item.href ||
+                (item.href !== "/dashboard" && pathname.startsWith(item.href));
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={onClose}
+                  className={cn(
+                    "flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200",
+                    isActive
+                      ? "bg-[#07172D] text-white"
+                      : "text-gray-600 hover:bg-gray-100 hover:text-[#07172D]",
+                  )}
+                >
+                  <Icon className="w-5 h-5 shrink-0" />
+                  <span>{item.label}</span>
+                </Link>
+              );
+            })}
+          </>
+        </>
+      )}
     </nav>
   );
 }
@@ -94,7 +132,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 </div>
                 {onClose && (
                   <Button
-                  variant={"ghost"}
+                    variant={"ghost"}
                     onClick={onClose}
                     className="lg:hidde p-2 rounded-md hover:bg-gray-100 transition-colors"
                   >

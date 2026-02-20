@@ -10,25 +10,25 @@ export const faqData: FAQCategory[] = [
     ),
     items: [
       {
-        q: "What is RedactAI?",
-        a: "RedactAI is an AI-assisted procurement drafting and review platform built exclusively for Spanish public administrations. It helps officials prepare legally compliant tender documents faster, with every suggestion grounded in the Official State Gazette (BOE) and approved procurement precedents.",
+        q: "¿Qué es RedactAI?",
+        a: "RedactAI es una plataforma de redacción y revisión de licitaciones asistida por IA, construida exclusivamente para administraciones públicas españolas. Ayuda a los funcionarios a preparar documentos de licitación legalmente conformes más rápido, con cada sugerencia basada en la Gaceta Oficial del Estado (BOE) y precedentes de contratación aprobados.",
       },
       {
-        q: "Who is RedactAI designed for?",
-        a: "RedactAI is designed specifically for procurement officers, legal advisors, and administrative staff within Spanish public administrations — from municipal ayuntamientos to regional governments and national agencies.",
+        q: "¿Para quién está diseñado RedactAI?",
+        a: "RedactAI está diseñado específicamente para funcionarios de contratación, asesores legales y personal administrativo dentro de administraciones públicas españolas, desde ayuntamientos municipales hasta gobiernos regionales y agencias nacionales.",
       },
       {
-        q: "Is RedactAI a replacement for legal counsel?",
-        a: "No. RedactAI is a tool that assists legal and administrative professionals — it does not replace them. Every suggestion requires human review and approval. The platform is designed to reduce manual workload and legal risk, not to make autonomous legal decisions.",
+        q: "¿Es RedactAI un sustituto del asesoramiento legal?",
+        a: "No. RedactAI es una herramienta que asiste a profesionales legales y administrativos, no los reemplaza. Cada sugerencia requiere revisión y aprobación humana. La plataforma está diseñada para reducir la carga de trabajo manual y el riesgo legal, no para tomar decisiones legales autónomas.",
       },
       {
-        q: "In what languages is RedactAI available?",
-        a: "RedactAI currently supports Spanish (Castilian). Support for Catalan, Basque, and Galician is on our roadmap for 2025.",
+        q: "¿En qué idiomas está disponible RedactAI?",
+        a: "RedactAI actualmente es compatible con español (castellano). La compatibilidad con catalán, euskera y gallego está en nuestro plan para 2025.",
       },
     ],
   },
   {
-    label: "Documents & Upload",
+    label: "Documentos y Carga",
     icon: (
       <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
         <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -36,25 +36,25 @@ export const faqData: FAQCategory[] = [
     ),
     items: [
       {
-        q: "What file formats does RedactAI support?",
-        a: "RedactAI accepts Word documents (.docx) and PDF files. For best results, we recommend submitting editable Word documents. PDF support includes automatic text extraction for scanned and digitally-created PDFs.",
+        q: "¿Qué formatos de archivo admite RedactAI?",
+        a: "RedactAI acepta documentos de Word (.docx) y archivos PDF. Para obtener los mejores resultados, recomendamos enviar documentos de Word editables. La compatibilidad con PDF incluye extracción automática de texto para PDF escaneados y creados digitalmente.",
       },
       {
-        q: "What is the maximum document size?",
-        a: "RedactAI supports tender documents from 25 pages up to 890 pages. Files up to 200 MB can be uploaded directly. If your document is larger, please contact our support team for an assisted upload.",
+        q: "¿Cuál es el tamaño máximo de documento?",
+        a: "RedactAI admite documentos de licitación desde 25 páginas hasta 890 páginas. Los archivos de hasta 200 MB se pueden cargar directamente. Si su documento es más grande, póngase en contacto con nuestro equipo de soporte para una carga asistida.",
       },
       {
-        q: "Is my document data secure?",
-        a: "Yes. All documents are encrypted in transit using TLS 1.3 and at rest using AES-256 encryption. RedactAI is fully compliant with the EU General Data Protection Regulation (GDPR) and Spain's Organic Law on Data Protection (LOPDGDD). Documents are never used to train any AI models.",
+        q: "¿Son seguros mis datos de documento?",
+        a: "Sí. Todos los documentos se cifran en tránsito utilizando TLS 1.3 y en reposo utilizando cifrado AES-256. RedactAI cumple completamente con el Reglamento General de Protección de Datos (RGPD) de la UE y la Ley Orgánica de Protección de Datos Personales de España (LOPDGDD). Los documentos nunca se utilizan para entrenar ningún modelo de IA.",
       },
       {
-        q: "Can I start from a blank template instead of uploading?",
-        a: "Yes. RedactAI includes a library of official government templates sourced from the Ministry of Finance's procurement portal. You can start any tender directly from one of these templates and build it out with AI assistance.",
+        q: "¿Puedo comenzar desde una plantilla en blanco en lugar de cargar?",
+        a: "Sí. RedactAI incluye una biblioteca de plantillas oficiales del gobierno obtenidas del portal de contratación del Ministerio de Hacienda. Puede comenzar cualquier licitación directamente desde una de estas plantillas y desarrollarla con asistencia de IA.",
       },
     ],
   },
   {
-    label: "AI & Suggestions",
+    label: "IA y Sugerencias",
     icon: (
       <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
         <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -62,25 +62,25 @@ export const faqData: FAQCategory[] = [
     ),
     items: [
       {
-        q: "Where do the AI suggestions come from?",
-        a: "Every suggestion is derived from official sources only — primarily the Official State Gazette (BOE), the Government Procurement Portal (PLACE), and a curated database of approved Spanish public tenders. RedactAI never invents information or uses unverified sources.",
+        q: "¿De dónde provienen las sugerencias de IA?",
+        a: "Cada sugerencia se deriva únicamente de fuentes oficiales, principalmente la Gaceta Oficial del Estado (BOE), el Portal de Contratación del Gobierno (PLACE) y una base de datos seleccionada de licitaciones públicas españolas aprobadas. RedactAI nunca inventa información ni utiliza fuentes no verificadas.",
       },
       {
-        q: "Can the AI make changes to my document automatically?",
-        a: "No. This is a core principle of RedactAI. Zero changes are applied automatically. Every suggestion is shown to you for review, and you must explicitly accept, edit, or reject each one before it is applied. This ensures full human control at every step.",
+        q: "¿Puede la IA realizar cambios en mi documento automáticamente?",
+        a: "No. Este es un principio fundamental de RedactAI. No se aplica ningún cambio automáticamente. Cada sugerencia se le muestra para su revisión, y debe aceptar, editar o rechazar explícitamente cada una antes de que se aplique. Esto garantiza el control humano completo en cada paso.",
       },
       {
-        q: "What does a suggestion look like?",
-        a: "Each suggestion is displayed in a side-by-side view showing your original text alongside the proposed revision. Below the comparison, you'll see a plain-language explanation of why the change is recommended and the specific legal article or provision it references.",
+        q: "¿Cómo se ve una sugerencia?",
+        a: "Cada sugerencia se muestra en una vista lado a lado que muestra su texto original junto a la revisión propuesta. Debajo de la comparación, verá una explicación en lenguaje natural de por qué se recomienda el cambio y el artículo o disposición legal específica a la que hace referencia.",
       },
       {
-        q: "What happens if I disagree with a suggestion?",
-        a: "You can reject any suggestion with a single click. Rejected suggestions are logged in your audit trail but are never applied to the document. You can also edit a suggestion inline before accepting it, giving you full control over the final wording.",
+        q: "¿Qué pasará si no estoy de acuerdo con una sugerencia?",
+        a: "Puede rechazar cualquier sugerencia con un solo clic. Las sugerencias rechazadas se registran en su registro de auditoría pero nunca se aplican al documento. También puede editar una sugerencia en línea antes de aceptarla, lo que le da control total sobre la redacción final.",
       },
     ],
   },
   {
-    label: "Compliance & Legal",
+    label: "Conformidad y Legal",
     icon: (
       <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
         <path d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
@@ -88,25 +88,25 @@ export const faqData: FAQCategory[] = [
     ),
     items: [
       {
-        q: "What Spanish procurement laws does RedactAI cover?",
-        a: "RedactAI covers Law 9/2017 on Public Sector Contracts (LCSP), Royal Decree 1098/2001, Royal Decree 817/2009, and the relevant EU Directives 2014/23/EU and 2014/24/EU as transposed into Spanish law. The legal database is updated regularly to reflect new BOE publications.",
+        q: "¿Qué leyes de contratación pública españolas cubre RedactAI?",
+        a: "RedactAI cubre la Ley 9/2017 sobre Contratos del Sector Público (LCSP), Real Decreto 1098/2001, Real Decreto 817/2009 y las Directivas UE relevantes 2014/23/EU y 2014/24/EU tal como se transponEN en la ley española. La base de datos legal se actualiza regularmente para reflejar nuevas publicaciones en el BOE.",
       },
       {
-        q: "Does RedactAI provide a compliance certificate?",
-        a: "RedactAI generates a compliance summary report with every export. This report outlines the issues detected, the suggestions made, and the decisions taken by the reviewing officer. While this is not a formal legal certificate, it provides a structured compliance record suitable for administrative files.",
+        q: "¿Proporciona RedactAI un certificado de conformidad?",
+        a: "RedactAI genera un informe de resumen de conformidad con cada exportación. Este informe describe los problemas detectados, las sugerencias realizadas y las decisiones tomadas por el funcionario revisor. Si bien esto no es un certificado legal formal, proporciona un registro de conformidad estructurado adecuado para archivos administrativos.",
       },
       {
-        q: "Is there an audit trail?",
-        a: "Yes. Every action taken within a document — including which suggestions were accepted, edited, or rejected, and by whom — is recorded in a timestamped audit log. This log is exportable alongside the final document and can be submitted as part of the administrative file.",
+        q: "¿Hay un registro de auditoría?",
+        a: "Sí. Cada acción tomada dentro de un documento, incluyendo qué sugerencias fueron aceptadas, editadas o rechazadas por quién, se registra en un registro de auditoría con marca de tiempo. Este registro es exportable junto con el documento final y puede presentarse como parte del archivo administrativo.",
       },
       {
-        q: "Can RedactAI help if a tender has already been challenged?",
-        a: "RedactAI is a drafting and review tool, not a legal defence service. If a tender has already been impugned, we recommend consulting a qualified procurement lawyer. RedactAI can help you prepare future documents that reduce the risk of similar challenges.",
+        q: "¿Puede RedactAI ayudar si una licitación ya ha sido impugnada?",
+        a: "RedactAI es una herramienta de redacción y revisión, no un servicio de defensa legal. Si una licitación ya ha sido impugnada, recomendamos consultar a un abogado de contratación pública calificado. RedactAI puede ayudarle a preparar documentos futuros que reduzcan el riesgo de desafíos similares.",
       },
     ],
   },
   {
-    label: "Pricing & Plans",
+    label: "Precios y Planes",
     icon: (
       <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
         <path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
@@ -114,20 +114,20 @@ export const faqData: FAQCategory[] = [
     ),
     items: [
       {
-        q: "How is RedactAI priced?",
-        a: "RedactAI is offered on a per-administration subscription basis. Pricing scales with the number of active users and the volume of documents processed per month. Contact our sales team for a tailored quote based on your administration's procurement volume.",
+        q: "¿Cómo se cotiza RedactAI?",
+        a: "RedactAI se ofrece con base en suscripción por administración. Los precios escalan con el número de usuarios activos y el volumen de documentos procesados por mes. Póngase en contacto con nuestro equipo de ventas para obtener una cotización personalizada basada en el volumen de contratación de su administración.",
       },
       {
-        q: "Is there a free trial?",
-        a: "Yes. We offer a 14-day free trial with full access to all features, including document upload, AI analysis, and export. No credit card is required to start your trial.",
+        q: "¿Hay una prueba gratuita?",
+        a: "Sí. Ofrecemos una prueba gratuita de 14 días con acceso completo a todas las funciones, incluyendo carga de documentos, análisis de IA y exportación. No se requiere tarjeta de crédito para comenzar su prueba.",
       },
       {
-        q: "Are there discounts for smaller administrations?",
-        a: "Yes. We have special pricing tiers for smaller municipalities and local bodies with lower procurement volumes. Please reach out to our sales team to discuss your specific situation.",
+        q: "¿Hay descuentos para administraciones más pequeñas?",
+        a: "Sí. Tenemos niveles de precios especiales para municipios más pequeños y organismos locales con volúmenes de contratación más bajos. Por favor comuníquese con nuestro equipo de ventas para discutir su situación específica.",
       },
       {
-        q: "Can we pay via public procurement framework?",
-        a: "Yes. RedactAI can be procured through approved framework agreements for software services. Contact us with your administration's procurement requirements and we will provide the necessary documentation.",
+        q: "¿Podemos pagar a través de un marco de contratación pública?",
+        a: "Sí. RedactAI se puede contratar a través de acuerdos marco aprobados para servicios de software. Póngase en contacto con nosotros con los requisitos de contratación de su administración y proporcionaremos la documentación necesaria.",
       },
     ],
   },

@@ -23,7 +23,7 @@ export function SuggestionCard() {
       {/* Suggestion detected card */}
       <div className="rounded-xl bg-gray-100 border-l-4 border-[#07162D] p-6 mb-6">
         <p className="text-sm sm:text-base font-bold text-[#07162D] tracking-widest uppercase mb-2">
-          Suggestion Detected
+          Sugerencia Detectada
         </p>
         <p className="text-base text-gray-600 leading-relaxed">
           Clause 4.2 requires per law 9/2017…
@@ -37,14 +37,14 @@ export function SuggestionCard() {
           
           className="flex-1 py-5 bg-[#07162D] hover:bg-white hover:text-[#07162D] text-white text-sm font-semibold rounded-full border-2 border-[#07162D]"
         >
-          Accept
+          Aceptar
         </Button>
         <Button
           variant="outline"
           size="sm"
           className="flex-1 py-5 border-2 border-[#07162D] text-[#07162D] hover:bg-[#07162D] hover:text-white text-sm font-semibold rounded-full"
         >
-          Reject
+          Rechazar
         </Button>
       </div>
     </div>

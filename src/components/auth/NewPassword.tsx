@@ -142,7 +142,7 @@ export default function NewPasswordPage() {
             className="text-2xl font-bold text-[#07162D] mb-1"
             style={{ fontFamily: "'Georgia', serif" }}
           >
-            Create new password
+            Crear nueva contraseña
           </h1>
           <p className="text-sm text-gray-400 mb-8 leading-relaxed">
             Your new password must be different from your previous passwords and
@@ -309,18 +309,17 @@ export default function NewPasswordPage() {
               className="text-xl font-bold text-[#07162D] mb-2"
               style={{ fontFamily: "'Georgia', serif" }}
             >
-              Password reset!
+              ¡Contraseña restablecida!
             </h3>
             <p className="text-sm text-gray-400 max-w-xs">
-              Your password has been updated successfully. You can now sign in
-              with your new password.
+              Tu contraseña ha sido actualizada exitosamente. Ahora puedes iniciar sesión con tu nueva contraseña.
             </p>
           </div>
           <Button
             onClick={() => router.push("/login")}
             className="bg-[#07162D] hover:bg-[#0d2240] text-white border-0 px-8 h-12 text-sm font-semibold rounded-xl"
           >
-            Back to Sign In
+            Volver a Iniciar Sesión
           </Button>
         </motion.div>
       )}

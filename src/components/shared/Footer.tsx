@@ -5,15 +5,15 @@ import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 
 const footerLinks = {
-  Company: [
-    "About Us",
-    "How it Works",
-    "Legal References",
-    "Privacy Policy",
-    "Terms of Service",
+  Empresa: [
+    "Acerca de Nosotros",
+    "Cómo Funciona",
+    "Referencias Legales",
+    "Política de Privacidad",
+    "Términos de Servicio",
   ],
-  Product: ["Features", "Security", "Compliance", "Pricing", "Changelog"],
-  Support: ["Documentation", "Contact Us", "FAQ", "Status"],
+  Producto: ["Características", "Seguridad", "Cumplimiento", "Precios", "Historial de Cambios"],
+  Apoyo: ["Documentación", "Contáctanos", "Preguntas Frecuentes", "Estado"],
 };
 
 const socialIcons = {
@@ -157,21 +157,21 @@ export default function Footer() {
                 </div>
 
                 <p className="text-sm leading-relaxed text-gray-500 max-w-xs mb-6">
-                  NovaTech Solutions Ltd. is a forward-thinking software company
-                  dedicated to building intuitive, efficient, and scalable
-                  digital products for businesses of all sizes. We specialize in
-                  developing modern web applications, cloud-based tools
+                  NovaTech Solutions es una empresa de software innovadora
+                  dedicada a crear productos digitales intuitivos, eficientes y escalables
+                  para empresas de todos los tamaños. Nos especializamos en
+                  desarrollar aplicaciones web modernas y herramientas basadas en la nube
                 </p>
 
                 {/* Contact info */}
               </motion.div>
               <motion.div className="col-span-3" variants={fadeUp}>
                 <div className="flex flex-col gap-2.5">
-                  <h1 className="text-3xl font-semibold">Contact Info</h1>
+                  <h1 className="text-3xl font-semibold">Información de Contacto</h1>
                   <p className="text-sm max-w-xl text-gray-400">
-                    NovaTech Solutions Ltd. is a forward-thinking software
-                    company dedicated to building
-                    intuitive.dsfafdasdfsadasdfasdf
+                    NovaTech Solutions es una empresa de software innovadora
+                    dedicada a crear soluciones
+                    intuitivas y escalables para administraciones públicas
                   </p>
                   <div className="flex items-center gap-2.5 text-sm text-gray-500">
                     <svg
@@ -221,8 +221,8 @@ export default function Footer() {
             >
               {/* Copyright */}
               <p className="text-xs text-gray-400 text-center sm:text-left">
-                © {new Date().getFullYear()} NovaTech Solutions Ltd. All rights
-                reserved.
+                © {new Date().getFullYear()} NovaTech Solutions S.L. Todos los derechos
+                reservados.
               </p>
 
               {/* Social icons */}

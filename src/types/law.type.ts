@@ -14,4 +14,4 @@ export interface Article {
   body: string;
 }
 
-export type Category = "All categories" | "Public Contracts" | "Procurement" | "Regulations" | "Decrees";
+export type Category = "Todas las categorías" | "Contratos Públicos" | "Contratación" | "Reglamentos" | "Decretos";

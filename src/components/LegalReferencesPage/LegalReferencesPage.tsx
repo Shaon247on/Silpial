@@ -69,8 +69,7 @@ export default function LegalReferencesPage() {
               </svg>
 
               <p className="text-sm text-white/70 leading-relaxed">
-                All laws are uploaded by the platform administrator and sourced
-                from official legal references.
+                Todas las leyes son cargadas por el administrador de la plataforma y provienen de referencias legales oficiales.
               </p>
             </div>
           </motion.div>

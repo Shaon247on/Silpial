@@ -26,7 +26,7 @@ export default function PageHeader({
     >
       <div>
         <h1 className="text-2xl font-bold text-[#07172D] tracking-tight">
-          {title ?? `Welcome back, ${username}`}
+          {title ?? `Bienvenido de vuelta, ${username}`}
         </h1>
         <p className="mt-1 text-sm text-[#4A5565]">{subtitle}</p>
       </div>
@@ -37,7 +37,7 @@ export default function PageHeader({
           className="inline-flex items-center gap-2 px-5 py-3 bg-[#07172D] text-white text-sm font-medium rounded-lg hover:bg-[#0f2a4a] active:scale-95 transition-all duration-200 shrink-0 self-start"
         >
           <Plus className="w-4 h-4" />
-          Create new document
+          Crear nuevo documento
         </Link>
       )}
     </motion.div>

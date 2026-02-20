@@ -2,16 +2,16 @@ import { motion } from "framer-motion";
 export const steps = [
   {
     number: "01",
-    label: "Upload",
-    title: "Upload Your Tender Document",
-    summary: "Start with what you have — or from an official template.",
+    label: "Cargar",
+    title: "Cargue su Documento de Licitación",
+    summary: "Comience con lo que tiene — o desde una plantilla oficial.",
     description:
-      "Drag and drop your existing Word (.docx) or PDF tender documents into RedactAI. Our platform handles everything from small 25-page specifications to complex 890-page framework contracts. You can also choose from a library of official Spanish government templates to start fresh.",
+      "Arrastre y suelte sus documentos de licitación Word (.docx) o PDF existentes en RedactAI. Nuestra plataforma maneja todo, desde especificaciones pequeñas de 25 páginas hasta contratos marco complejos de 890 páginas. También puede elegir entre una biblioteca de plantillas oficiales del gobierno español para comenzar desde cero.",
     features: [
-      "Supports Word (.docx) and PDF formats",
-      "Large file support up to 890 pages",
-      "AES-256 end-to-end encryption",
-      "Official government template library",
+      "Admite formatos Word (.docx) y PDF",
+      "Soporte de archivos grandes hasta 890 páginas",
+      "Cifrado de extremo a extremo AES-256",
+      "Biblioteca de plantillas oficiales del gobierno",
     ],
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
@@ -21,8 +21,8 @@ export const steps = [
     visual: (
       <div className="bg-[#f7f8fa] rounded-2xl border border-gray-100 p-5 flex flex-col gap-3">
         <div className="flex items-center justify-between mb-1">
-          <span className="text-xs font-semibold text-[#07162D]">Upload Document</span>
-          <span className="text-[10px] text-gray-400">Max 890 pages</span>
+          <span className="text-xs font-semibold text-[#07162D]">Cargar Documento</span>
+          <span className="text-[10px] text-gray-400">Máximo 890 páginas</span>
         </div>
         <div className="border-2 border-dashed border-gray-200 rounded-xl p-6 flex flex-col items-center gap-2 bg-white">
           <div className="w-10 h-10 rounded-full bg-[#07162D]/5 flex items-center justify-center">
@@ -30,11 +30,11 @@ export const steps = [
               <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
             </svg>
           </div>
-          <p className="text-xs text-gray-500 text-center">Drop your file here or <span className="text-[#07162D] font-medium">browse</span></p>
-          <p className="text-[10px] text-gray-400">.docx, .pdf supported</p>
+          <p className="text-xs text-gray-500 text-center">Suelte su archivo aquí o <span className="text-[#07162D] font-medium">explore</span></p>
+          <p className="text-[10px] text-gray-400">.docx, .pdf soportados</p>
         </div>
         <div className="flex gap-2">
-          {["Template A", "Template B", "Template C"].map((t) => (
+          {["Plantilla A", "Plantilla B", "Plantilla C"].map((t) => (
             <div key={t} className="flex-1 rounded-lg bg-white border border-gray-200 p-2 text-center">
               <div className="w-4 h-4 rounded bg-[#07162D]/10 mx-auto mb-1" />
               <p className="text-[9px] text-gray-500">{t}</p>
@@ -46,16 +46,16 @@ export const steps = [
   },
   {
     number: "02",
-    label: "Analysis",
-    title: "AI Analyses Your Document",
-    summary: "Deep clause-by-clause analysis grounded in official sources.",
+    label: "Análisis",
+    title: "La IA Analiza su Documento",
+    summary: "Análisis profundo cláusula por cláusula basado en fuentes oficiales.",
     description:
-      "RedactAI reads every clause and section of your document, cross-referencing it against thousands of approved Spanish public tenders and the Official State Gazette (BOE). It identifies gaps, regulatory mismatches, and language that could expose the tender to legal challenge — all in minutes.",
+      "RedactAI lee cada cláusula y sección de su documento, comparándola contra miles de licitaciones públicas españolas aprobadas y la Gaceta Oficial del Estado (BOE). Identifica brechas, desajustes regulatorios e idiomas que podrían exponer la licitación a desafíos legales, todo en minutos.",
     features: [
-      "Clause-by-clause structural analysis",
-      "Cross-referenced with BOE and PLACE portal",
-      "Flags missing mandatory sections",
-      "Detects legally ambiguous language",
+      "Análisis estructural cláusula por cláusula",
+      "Referencia cruzada con el portal BOE y PLACE",
+      "Marca secciones obligatorias faltantes",
+      "Detecta lenguaje legalmente ambiguo",
     ],
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
@@ -64,11 +64,11 @@ export const steps = [
     ),
     visual: (
       <div className="bg-[#f7f8fa] rounded-2xl border border-gray-100 p-5 flex flex-col gap-3">
-        <span className="text-xs font-semibold text-[#07162D]">Analysis in progress…</span>
+        <span className="text-xs font-semibold text-[#07162D]">Análisis en progreso…</span>
         {[
-          { label: "Clause structure", pct: 100, done: true },
-          { label: "BOE cross-reference", pct: 78, done: false },
-          { label: "Missing sections", pct: 45, done: false },
+          { label: "Estructura de cláusula", pct: 100, done: true },
+          { label: "Referencia cruzada BOE", pct: 78, done: false },
+          { label: "Secciones faltantes", pct: 45, done: false },
         ].map((item) => (
           <div key={item.label}>
             <div className="flex justify-between mb-1">
@@ -89,23 +89,23 @@ export const steps = [
         ))}
         <div className="mt-1 rounded-lg bg-blue-50 border border-blue-100 px-3 py-2 flex items-start gap-2">
           <svg className="w-3.5 h-3.5 text-blue-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          <p className="text-[10px] text-blue-600">3 issues detected — review required</p>
+          <p className="text-[10px] text-blue-600">3 problemas detectados — se requiere revisión</p>
         </div>
       </div>
     ),
   },
   {
     number: "03",
-    label: "Review",
-    title: "Review Every Suggestion Manually",
-    summary: "You approve. You reject. Nothing changes automatically.",
+    label: "Revisión",
+    title: "Revise Cada Sugerencia Manualmente",
+    summary: "Usted aprueba. Usted rechaza. Nada cambia automáticamente.",
     description:
-      "Each AI suggestion is shown side-by-side with your original text along with a plain-language explanation and the specific law or article it references. Accept it as-is, edit it inline, or reject it entirely. Every decision is logged in a full audit trail.",
+      "Cada sugerencia de IA se muestra lado a lado con su texto original, junto con una explicación en lenguaje claro y la ley o artículo específico al que hace referencia. Aceptelo tal cual, edítelo en línea o rechácelo completamente. Cada decisión se registra en un registro de auditoría completo.",
     features: [
-      "Side-by-side original vs. suggested text",
-      "Legal citation for every suggestion",
-      "Accept, edit inline, or reject",
-      "Full timestamped audit log",
+      "Texto original vs. sugerido lado a lado",
+      "Cita legal para cada sugerencia",
+      "Aceptar, editar en línea o rechazar",
+      "Registro de auditoría completo con marca de tiempo",
     ],
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
@@ -115,43 +115,43 @@ export const steps = [
     visual: (
       <div className="bg-[#f7f8fa] rounded-2xl border border-gray-100 p-5 flex flex-col gap-3">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-semibold text-[#07162D]">Suggestion Detected</span>
-          <span className="text-[10px] text-gray-400">2 of 5</span>
+          <span className="text-xs font-semibold text-[#07162D]">Sugerencia Detectada</span>
+          <span className="text-[10px] text-gray-400">2 de 5</span>
         </div>
         <div className="grid grid-cols-2 gap-2">
           <div className="rounded-lg bg-red-50 border border-red-100 p-2.5">
             <p className="text-[9px] font-semibold text-red-400 uppercase tracking-wide mb-1">Original</p>
-            <p className="text-[10px] text-gray-600 leading-relaxed">The contractor shall deliver works within a reasonable timeframe…</p>
+            <p className="text-[10px] text-gray-600 leading-relaxed">El contratista deberá entregar las obras dentro de un plazo razonable…</p>
           </div>
           <div className="rounded-lg bg-green-50 border border-green-100 p-2.5">
-            <p className="text-[9px] font-semibold text-green-500 uppercase tracking-wide mb-1">Suggested</p>
-            <p className="text-[10px] text-gray-600 leading-relaxed">The contractor shall deliver works within 90 calendar days per Art. 29 Law 9/2017…</p>
+            <p className="text-[9px] font-semibold text-green-500 uppercase tracking-wide mb-1">Sugerido</p>
+            <p className="text-[10px] text-gray-600 leading-relaxed">El contratista deberá entregar las obras dentro de 90 días calendario per Art. 29 Ley 9/2017…</p>
           </div>
         </div>
         <div className="rounded-lg border border-gray-200 bg-white px-3 py-2">
-          <p className="text-[9px] text-gray-400 mb-0.5">Legal reference</p>
-          <p className="text-[10px] font-medium text-[#07162D]">Clause 4.2 requires per law 9/2017…</p>
+          <p className="text-[9px] text-gray-400 mb-0.5">Referencia legal</p>
+          <p className="text-[10px] font-medium text-[#07162D]">La cláusula 4.2 requiere per ley 9/2017…</p>
         </div>
         <div className="flex gap-2">
-          <div className="flex-1 rounded-lg bg-[#07162D] text-white text-[10px] font-semibold py-1.5 text-center">Accept</div>
-          <div className="flex-1 rounded-lg border border-gray-300 text-gray-500 text-[10px] py-1.5 text-center">Edit</div>
-          <div className="flex-1 rounded-lg border border-gray-300 text-gray-500 text-[10px] py-1.5 text-center">Reject</div>
+          <div className="flex-1 rounded-lg bg-[#07162D] text-white text-[10px] font-semibold py-1.5 text-center">Aceptar</div>
+          <div className="flex-1 rounded-lg border border-gray-300 text-gray-500 text-[10px] py-1.5 text-center">Editar</div>
+          <div className="flex-1 rounded-lg border border-gray-300 text-gray-500 text-[10px] py-1.5 text-center">Rechazar</div>
         </div>
       </div>
     ),
   },
   {
     number: "04",
-    label: "Export",
-    title: "Export a Submission-Ready Document",
-    summary: "Download your finalized tender, ready for official portal submission.",
+    label: "Exportar",
+    title: "Exporte un Documento Listo para Envío",
+    summary: "Descargue su licitación finalizada, lista para envío en portal oficial.",
     description:
-      "Once you've approved all changes, export your document in Word format. All original formatting, clause numbering, and headers are preserved. Your download includes a compliance summary report and a timestamped audit log — both of which can be submitted alongside the tender if required.",
+      "Una vez que haya aprobado todos los cambios, exporte su documento en formato Word. Todo el formato original, numeración de cláusulas y encabezados se conservan. Su descarga incluye un informe de resumen de conformidad y un registro de auditoría con marca de tiempo, ambos pueden enviarse junto con la licitación si es necesario.",
     features: [
-      "Word (.docx) export preserving all formatting",
-      "Compliance summary report included",
-      "Timestamped audit trail of changes",
-      "Re-export anytime after further edits",
+      "Exportación Word (.docx) preservando todo el formato",
+      "Informe de resumen de conformidad incluido",
+      "Registro de auditoría de cambios con marca de tiempo",
+      "Reexporte en cualquier momento después de ediciones adicionales",
     ],
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
@@ -160,7 +160,7 @@ export const steps = [
     ),
     visual: (
       <div className="bg-[#f7f8fa] rounded-2xl border border-gray-100 p-5 flex flex-col gap-3">
-        <span className="text-xs font-semibold text-[#07162D]">Export Ready</span>
+        <span className="text-xs font-semibold text-[#07162D]">Listo para Exportar</span>
         <div className="rounded-xl bg-white border border-gray-200 p-4 flex items-center gap-3">
           <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
             <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -168,8 +168,8 @@ export const steps = [
             </svg>
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-xs font-semibold text-[#07162D] truncate">Tender_Final_v2.docx</p>
-            <p className="text-[10px] text-gray-400 mt-0.5">Compliant · 142 pages · 2.4 MB</p>
+            <p className="text-xs font-semibold text-[#07162D] truncate">Licitación_Final_v2.docx</p>
+            <p className="text-[10px] text-gray-400 mt-0.5">Conforme · 142 páginas · 2.4 MB</p>
           </div>
           <div className="w-7 h-7 rounded-lg bg-[#07162D] flex items-center justify-center flex-shrink-0">
             <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
@@ -178,8 +178,8 @@ export const steps = [
           </div>
         </div>
         {[
-          { label: "Compliance Report", color: "bg-green-50 border-green-100 text-green-700" },
-          { label: "Audit Trail Log", color: "bg-amber-50 border-amber-100 text-amber-700" },
+          { label: "Informe de Conformidad", color: "bg-green-50 border-green-100 text-green-700" },
+          { label: "Registro de Auditoría", color: "bg-amber-50 border-amber-100 text-amber-700" },
         ].map((item) => (
           <div key={item.label} className={`rounded-lg border px-3 py-2 flex items-center justify-between ${item.color}`}>
             <span className="text-[10px] font-medium">{item.label}</span>
@@ -192,8 +192,8 @@ export const steps = [
 ];
 
 export const principles = [
-  { icon: "🔒", title: "Official Sources Only", desc: "BOE, PLACE, and Government Procurement Portal — nothing else." },
-  { icon: "👁️", title: "No Black Box", desc: "Every suggestion comes with a transparent explanation and legal citation." },
-  { icon: "✋", title: "Human in Control", desc: "Zero automatic changes. Every edit requires your explicit approval." },
-  { icon: "📋", title: "Full Audit Trail", desc: "Every decision is logged, timestamped, and exportable for compliance review." },
+  { icon: "🔒", title: "Solo Fuentes Oficiales", desc: "BOE, PLACE y Portal de Contratación del Gobierno — nada más." },
+  { icon: "👁️", title: "Sin Caja Negra", desc: "Cada sugerencia viene con una explicación transparente y cita legal." },
+  { icon: "✋", title: "Humano en Control", desc: "Cero cambios automáticos. Cada edición requiere tu aprobación explícita." },
+  { icon: "📋", title: "Registro de Auditoría Completo", desc: "Cada decisión se registra, se marca con hora y es exportable para revisión de conformidad." },
 ];

@@ -76,9 +76,9 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
               className="text-white/90 text-lg font-medium leading-relaxed mb-3 max-w-xs"
               style={{ fontFamily: "'Georgia', serif" }}
             >
-              &ldquo;Prepare compliant tenders with confidence — every suggestion backed by official sources.&ldquo;
+              &ldquo;Prepare licitaciones que cumplan con las normas con confianza — Cada sugerencia respaldada por fuentes oficiales&ldquo;
             </blockquote>
-            <p className="text-white/50 text-sm">RedactAI · For Spanish public administrations</p>
+            <p className="text-white/50 text-sm">RedactAI · Para las administraciones públicas españolas</p>
           </motion.div>
         </AnimatePresence>
       </motion.div>

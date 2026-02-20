@@ -44,16 +44,15 @@ export default function FAQPage() {
                 letterSpacing: "-0.02em",
               }}
             >
-              Frequently Asked Questions
+              Preguntas Frecuentes
             </h1>
             <p className="text-base text-white/50 leading-relaxed">
-              Everything you need to know about RedactAI. Can&apos;t find what
-              you&apos;re looking for?{" "}
+              Todo lo que necesitas saber sobre RedactAI. ¿No encuentras lo que buscas?{" "}
               <Link
                 href="/contact-us"
                 className="text-white/80 underline underline-offset-2 hover:text-white transition-colors"
               >
-                Contact us.
+                Contáctanos.
               </Link>
             </p>
           </motion.div>
@@ -143,17 +142,16 @@ export default function FAQPage() {
               className="text-xl font-bold text-white mb-2"
               style={{ fontFamily: "'Georgia', serif" }}
             >
-              Still have questions?
+              ¿Aún tienes preguntas?
             </h3>
             <p className="text-sm" style={{ color: "#797979" }}>
-              Our team is available Monday–Friday, 9am–6pm CET. We typically
-              respond within 24 hours.
+              Nuestro equipo está disponible de lunes a viernes, de 9:00 a 18:00 CET. Normalmente respondemos en 24 horas.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 shrink-0">
             <Link href="/register">
               <Button className="bg-white hover:bg-gray-100 text-[#07162D] border-0 px-6 font-semibold">
-                Get Started Free
+                Comenzar Gratis
               </Button>
             </Link>
             <Link href="/contact-us">
@@ -161,7 +159,7 @@ export default function FAQPage() {
                 variant="outline"
                 className="border-white/20 text-white hover:bg-white/10 bg-transparent px-6"
               >
-                Contact Us
+                Contáctanos
               </Button>
             </Link>
           </div>

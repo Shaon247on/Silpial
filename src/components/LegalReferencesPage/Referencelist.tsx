@@ -18,7 +18,7 @@ export default function ReferenceList({
   onSelect,
 }: ReferenceListProps) {
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState<Category>("All categories");
+  const [category, setCategory] = useState<Category>("Todas las categorías");
 
   const filtered = references.filter((r) => {
     const matchesSearch =
@@ -26,7 +26,7 @@ export default function ReferenceList({
       r.title.toLowerCase().includes(search.toLowerCase()) ||
       r.shortDescription.toLowerCase().includes(search.toLowerCase());
     const matchesCategory =
-      category === "All categories" || r.category === category;
+      category === "Todas las categorías" || r.category === category;
     return matchesSearch && matchesCategory;
   });
 
@@ -45,7 +45,7 @@ export default function ReferenceList({
           className="text-lg font-bold mb-5"
           style={{ color: "#07162D" }}
         >
-          Reference List
+          Lista de Referencias
         </h2>
 
         {/* Filters row */}
@@ -89,7 +89,7 @@ export default function ReferenceList({
             </svg>
             <input
               type="text"
-              placeholder="Search"
+              placeholder="Buscar"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full border border-gray-200 rounded-lg pl-9 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#07162D]/20 focus:border-[#07162D] transition-colors placeholder:text-gray-400 bg-white"
@@ -167,7 +167,7 @@ export default function ReferenceList({
                     <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                   <span className="text-xs" style={{ color: "#9CA3AF" }}>
-                    Updated: {ref.updatedAt}
+                    Última actualización: {ref.updatedAt}
                   </span>
                 </div>
               </motion.button>

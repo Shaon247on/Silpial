@@ -109,10 +109,10 @@ function DashboardMockup() {
                 className="font-bold text-[#07162D] leading-tight"
                 style={{ fontSize: 13 }}
               >
-                Welcome back, Silpia!
+                ¡Bienvenido de vuelta, Silpia!
               </p>
               <p className="text-gray-400 mt-0.5" style={{ fontSize: 9 }}>
-                Manage your tender documents with clarity and compliance.
+                Administra tus documentos de licitación con claridad y cumplimiento normativo.
               </p>
             </div>
             <div
@@ -128,7 +128,7 @@ function DashboardMockup() {
               >
                 <path d="M12 4v16m8-8H4" />
               </svg>
-              <span className="hidden md:block">Create new document</span>
+              <span className="hidden md:block">Crear nuevo documento</span>
             </div>
           </div>
 
@@ -330,9 +330,9 @@ export default function Hero() {
             className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight max-w-3xl"
             style={{ fontFamily: "'Georgia', serif", letterSpacing: "-0.02em" }}
           >
-            Prepare compliant tenders{" "}
+            Prepare licitaciones que cumplan con las {" "}
             <span className="relative inline-block">
-              <span className="relative z-10">with confidence</span>
+              <span className="relative z-10">normas con confianza</span>
               <motion.span
                 className="absolute bottom-1 left-0 right-0 h-2 bg-red-600/30 rounded-sm z-0"
                 initial={{ scaleX: 0 }}
@@ -348,8 +348,7 @@ export default function Hero() {
             variants={fadeUp}
             className="text-base sm:text-lg text-white/55 max-w-xl leading-relaxed"
           >
-            AI-assisted procurement drafting and review for Spanish
-            administrations, with full human control.
+            Redacción y revisión de procesos de contratación asistida por IA para administraciones españolas, con control humano completo.
           </motion.p>
 
           {/* CTA Buttons */}

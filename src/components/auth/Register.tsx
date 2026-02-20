@@ -49,10 +49,10 @@ type RegisterFormValues = z.infer<typeof registerSchema>;
 // ─── Password strength ────────────────────────────────────────────────────────
 
 const requirements = [
-  { label: "8+ characters", test: (p: string) => p.length >= 8 },
-  { label: "Uppercase letter", test: (p: string) => /[A-Z]/.test(p) },
-  { label: "Number", test: (p: string) => /[0-9]/.test(p) },
-  { label: "Special character", test: (p: string) => /[^A-Za-z0-9]/.test(p) },
+  { label: "8+ caracteres", test: (p: string) => p.length >= 8 },
+  { label: "Letra mayúscula", test: (p: string) => /[A-Z]/.test(p) },
+  { label: "Número", test: (p: string) => /[0-9]/.test(p) },
+  { label: "Carácter especial", test: (p: string) => /[^A-Za-z0-9]/.test(p) },
 ];
 
 function PasswordStrength({ password }: { password: string }) {
@@ -60,7 +60,7 @@ function PasswordStrength({ password }: { password: string }) {
   const passed = requirements.filter((r) => r.test(password)).length;
   const level = passed <= 1 ? 1 : passed <= 3 ? 2 : 3;
   const barColor = ["", "bg-red-400", "bg-amber-400", "bg-green-500"][level];
-  const label = ["", "Weak", "Fair", "Strong"][level];
+  const label = ["", "Débil", "Aceptable", "Fuerte"][level];
   const lblColor = ["", "text-red-500", "text-amber-500", "text-green-600"][
     level
   ];
@@ -145,10 +145,10 @@ export default function RegisterPage() {
         className="text-2xl font-bold text-[#07162D] mb-1"
         style={{ fontFamily: "'Georgia', serif" }}
       >
-        Create your account
+        Crea tu cuenta
       </h1>
       <p className="text-sm text-gray-400 mb-8">
-        Join RedactAI and start preparing compliant tenders.
+        Únete a RedactAI y comienza a preparar licitaciones conformes.
       </p>
 
       <Form {...form}>
@@ -160,7 +160,7 @@ export default function RegisterPage() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-sm font-semibold text-[#07162D]">
-                  Name
+                  Nombre
                 </FormLabel>
                 <FormControl>
                   <div className="relative">
@@ -168,8 +168,8 @@ export default function RegisterPage() {
                     <Input
                       {...field}
                       type="text"
-                      placeholder="Enter name"
-                      className="pl-10 h-12 rounded-xl border-gray-200 focus-visible:ring-[#07162D]/20 focus-visible:border-[#07162D] text-[#07162D] placeholder:text-gray-400"
+                      placeholder="Ingresa nombre"
+                      className="pl-10 h-12 rounded-xl border-gray-200 focus-visible:ring-[#07162D]/20 focus-visible:border-[#07172D] text-[#07162D] placeholder:text-gray-400"
                     />
                   </div>
                 </FormControl>
@@ -183,7 +183,7 @@ export default function RegisterPage() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-sm font-semibold text-[#07162D]">
-                  Email
+                  Correo
                 </FormLabel>
                 <FormControl>
                   <div className="relative">
@@ -191,8 +191,8 @@ export default function RegisterPage() {
                     <Input
                       {...field}
                       type="email"
-                      placeholder="Enter email"
-                      className="pl-10 h-12 rounded-xl border-gray-200 focus-visible:ring-[#07162D]/20 focus-visible:border-[#07162D] text-[#07162D] placeholder:text-gray-400"
+                      placeholder="Ingresa correo"
+                      className="pl-10 h-12 rounded-xl border-gray-200 focus-visible:ring-[#07162D]/20 focus-visible:border-[#07172D] text-[#07162D] placeholder:text-gray-400"
                     />
                   </div>
                 </FormControl>
@@ -208,7 +208,7 @@ export default function RegisterPage() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-sm font-semibold text-[#07162D]">
-                  Password
+                  Contraseña
                 </FormLabel>
                 <FormControl>
                   <div className="relative">
@@ -216,7 +216,7 @@ export default function RegisterPage() {
                     <Input
                       {...field}
                       type={showPassword ? "text" : "password"}
-                      placeholder="Enter password"
+                      placeholder="Ingresa contraseña"
                       className="pl-10 pr-10 h-12 rounded-xl border-gray-200 focus-visible:ring-[#07162D]/20 focus-visible:border-[#07162D] text-[#07162D] placeholder:text-gray-400"
                     />
                     <button
@@ -245,7 +245,7 @@ export default function RegisterPage() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-sm font-semibold text-[#07162D]">
-                  Confirm Password
+                  Confirmar Contraseña
                 </FormLabel>
                 <FormControl>
                   <div className="relative">
@@ -253,7 +253,7 @@ export default function RegisterPage() {
                     <Input
                       {...field}
                       type={showConfirm ? "text" : "password"}
-                      placeholder="Re-enter password"
+                      placeholder="Reingresa contraseña"
                       className="pl-10 pr-10 h-12 rounded-xl border-gray-200 focus-visible:ring-[#07162D]/20 focus-visible:border-[#07162D] text-[#07162D] placeholder:text-gray-400"
                     />
                     <button
@@ -287,7 +287,7 @@ export default function RegisterPage() {
                       >
                         <path d="M5 13l4 4L19 7" />
                       </svg>
-                      Passwords match
+                      Las contraseñas coinciden
                     </motion.p>
                   )}
                 </AnimatePresence>
@@ -323,22 +323,22 @@ export default function RegisterPage() {
                     d="M4 12a8 8 0 018-8v8z"
                   />
                 </svg>
-                Creating account…
+                Creando cuenta …
               </span>
             ) : (
-              "Sign up"
+              "Registrarse"
             )}
           </Button>
         </form>
       </Form>
 
       <p className="text-sm text-center text-gray-500 mt-6">
-        Have an account?{" "}
+        ¿Ya tienes una cuenta?{" "}
         <Link
           href="/login"
           className="font-bold text-[#07162D] hover:underline"
         >
-          Sign in
+          Inicia sesión
         </Link>
       </p>
     </div>

@@ -96,7 +96,7 @@ export default function DocDetailsPage() {
         className="mb-6"
       >
         <h1 className="text-2xl font-bold text-[#07172D]">{doc.name}</h1>
-        <p className="mt-1 text-sm text-[#4A5565]">Review the analysis results before proceeding.</p>
+        <p className="mt-1 text-sm text-[#4A5565]">Revisa los resultados del análisis antes de continuar.</p>
       </motion.div>
 
       {/* Stat Cards */}
@@ -187,7 +187,7 @@ export default function DocDetailsPage() {
               {paginated.length === 0 ? (
                 <tr>
                   <td colSpan={5} className="px-6 py-12 text-center text-sm text-gray-400">
-                    No clauses match your search or filter.
+                    Las cláusulas no coinciden con tu búsqueda o filtro.
                   </td>
                 </tr>
               ) : (

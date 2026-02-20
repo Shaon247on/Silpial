@@ -73,14 +73,14 @@ export default function ForgotPasswordPage() {
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
               <path d="M15 19l-7-7 7-7" />
             </svg>
-            Back to login
+            volver a iniciar sesión
           </Link>
 
           <h1 className="text-2xl font-bold text-[#07162D] mb-1" style={{ fontFamily: "'Georgia', serif" }}>
-            Forgot password?
+            olvidar contraseña
           </h1>
           <p className="text-sm text-gray-400 mb-8 leading-relaxed">
-            Enter your registered email and &apos;ll send you a verification code to reset your password.
+            Ingresa tu correo registrado y te enviaremos un código de verificación para restablecer tu contraseña.
           </p>
 
           <Form {...form}>
@@ -121,7 +121,7 @@ export default function ForgotPasswordPage() {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
                     </svg>
-                    Sending code…
+                    Enviando código…
                   </span>
                 ) : "Continue"}
               </Button>
@@ -129,8 +129,8 @@ export default function ForgotPasswordPage() {
           </Form>
 
           <p className="text-sm text-center text-gray-500 mt-6">
-            Remember your password?{" "}
-            <Link href="/login" className="font-bold text-[#07162D] hover:underline">Sign in</Link>
+            ¿Recuerdas tu contraseña?{" "}
+            <Link href="/login" className="font-bold text-[#07162D] hover:underline">Inicia sesión</Link>
           </p>
         </motion.div>
       )}

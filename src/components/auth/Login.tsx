@@ -65,10 +65,10 @@ export default function LoginPage() {
         className="text-2xl font-bold text-[#07162D] mb-1"
         style={{ fontFamily: "'Georgia', serif" }}
       >
-        Welcome back
+        Bienvenido de vuelta
       </h1>
       <p className="text-sm text-gray-400 mb-8">
-        Sign in to your RedactAI account.
+        Inicia sesión en tu cuenta de RedactAI.
       </p>
 
       <Form {...form}>
@@ -81,7 +81,7 @@ export default function LoginPage() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-sm font-semibold text-[#07162D]">
-                  Email
+                  Correo
                 </FormLabel>
                 <FormControl>
                   <div className="relative">
@@ -89,7 +89,7 @@ export default function LoginPage() {
                     <Input
                       {...field}
                       type="email"
-                      placeholder="Enter email"
+                      placeholder="Ingresa correo"
                       className="pl-10 h-12 rounded-xl border-gray-200 focus:border-[#07162D] focus:ring-[#07162D]/20 text-[#07162D] placeholder:text-gray-400"
                     />
                   </div>
@@ -107,13 +107,13 @@ export default function LoginPage() {
               <FormItem>
                 <div className="flex items-center justify-between">
                   <FormLabel className="text-sm font-semibold text-[#07162D]">
-                    Password
+                    Contraseña
                   </FormLabel>
                   <Link
                     href="/forgot-password"
                     className="text-xs text-[#0ea5e9] hover:underline font-medium"
                   >
-                    Forgot password?
+                    ¿Olvidaste tu contraseña?
                   </Link>
                 </div>
                 <FormControl>
@@ -122,7 +122,7 @@ export default function LoginPage() {
                     <Input
                       {...field}
                       type={showPassword ? "text" : "password"}
-                      placeholder="Enter password"
+                      placeholder="Ingresa contraseña"
                       className="pl-10 pr-10 h-12 rounded-xl border-gray-200 focus:border-[#07162D] focus:ring-[#07162D]/20 text-[#07162D] placeholder:text-gray-400"
                     />
                     <button
@@ -157,7 +157,7 @@ export default function LoginPage() {
                   />
                 </FormControl>
                 <FormLabel className="text-sm text-gray-500 font-normal cursor-pointer">
-                  Remember me for 30 days
+                  Recuérdame por 30 días
                 </FormLabel>
               </FormItem>
             )}
@@ -174,19 +174,19 @@ export default function LoginPage() {
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
                 </svg>
-                Signing in…
+                Iniciando sesión…
               </span>
             ) : (
-              "Sign in"
+              "Inicia sesión"
             )}
           </Button>
         </form>
       </Form>
 
       <p className="text-sm text-center text-gray-500 mt-6">
-        Don&apos;t have an account?{" "}
+        ¿No tienes una cuenta?{" "}
         <Link href="/register" className="font-bold text-[#07162D] hover:underline">
-          Sign up
+          Registrarse
         </Link>
       </p>
     </div>

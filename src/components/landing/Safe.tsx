@@ -6,8 +6,8 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 const steps = [
   {
     number: "01",
-    title: "Upload Documents",
-    shortDesc: "Securely upload existing tender documents or start from official templates.",
+    title: "Cargar Documentos",
+    shortDesc: "Carga de forma segura documentos de licitación existentes o comienza a partir de plantillas oficiales.",
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
         <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
@@ -15,21 +15,21 @@ const steps = [
     ),
     expandedContent: {
       detail:
-        "Our secure upload system accepts both Word (.docx) and PDF formats, supporting large tender files between 25 and 890 pages. Documents are encrypted in transit and at rest using AES-256 encryption — fully compliant with EU data protection regulations.",
+        "Nuestro sistema de carga segura acepta formatos Word (.docx) y PDF, soportando archivos grandes de licitación entre 25 y 890 páginas. Los documentos se encriptan en tránsito y en reposo usando encriptación AES-256, totalmente compatible con regulaciones de protección de datos de la UE.",
       bullets: [
-        "Drag-and-drop or browse to upload",
-        "Supports Word (.docx) and PDF formats",
-        "Handles large files up to 890 pages",
-        "End-to-end AES-256 encryption",
-        "Or start fresh from official government templates",
+        "Arrastra y suelta o explora para cargar",
+        "Soporta formatos Word (.docx) y PDF",
+        "Maneja archivos grandes de hasta 890 páginas",
+        "Encriptación AES-256 de extremo a extremo",
+        "O comienza desde cero con plantillas oficiales del gobierno",
       ],
-      badge: "Secure & Fast",
+      badge: "Seguro y Rápido",
     },
   },
   {
     number: "02",
-    title: "AI Analysis & Comparison",
-    shortDesc: "The system analyzes structure and clauses, comparing them with successful public tenders from Spanish administrations.",
+    title: "Análisis de IA y Comparación",
+    shortDesc: "El sistema analiza la estructura y cláusulas, comparándolas con licitaciones públicas exitosas de administraciones españolas.",
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
         <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -37,21 +37,21 @@ const steps = [
     ),
     expandedContent: {
       detail:
-        "RedactAI cross-references your document against thousands of approved Spanish public tenders, identifying clause gaps, regulatory mismatches, and structural weaknesses. Every analysis is grounded in the Official State Gazette (BOE) and the Government Procurement Portal — no hallucinations, no guesswork.",
+        "RedactAI compara tu documento con miles de licitaciones públicas españolas aprobadas, identificando brechas de cláusulas, desajustes regulatorios y debilidades estructurales. Cada análisis se basa en la Gaceta Oficial del Estado (BOE) y el Portal de Contratación del Gobierno — sin alucinaciones, sin conjeturas.",
       bullets: [
-        "Clause-by-clause structural analysis",
-        "Cross-referenced with the Official State Gazette (BOE)",
-        "Benchmarked against successful tender precedents",
-        "Flags missing mandatory sections automatically",
-        "Detects ambiguous language that may invite legal challenge",
+        "Análisis estructural cláusula por cláusula",
+        "Referencia cruzada con la Gaceta Oficial del Estado (BOE)",
+        "Comparación con precedentes exitosos de licitación",
+        "Marca automáticamente secciones obligatorias faltantes",
+        "Detecta lenguaje ambiguo que pueda invitar desafíos legales",
       ],
-      badge: "Powered by Official Sources",
+      badge: "Impulsado por Fuentes Oficiales",
     },
   },
   {
     number: "03",
-    title: "Review Suggestions",
-    shortDesc: "Side-by-side comparison of original text and AI suggestions — you decide.",
+    title: "Revisa Sugerencias",
+    shortDesc: "Comparación lado a lado del texto original y sugerencias de IA — tú decides.",
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
         <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
@@ -59,21 +59,21 @@ const steps = [
     ),
     expandedContent: {
       detail:
-        "You remain in full control at every step. Each AI suggestion is displayed alongside the original text with a plain-language explanation of why the change is recommended and which legal provision it references. Accept, edit inline, or reject — nothing is applied automatically.",
+        "Mantienes el control total en cada paso. Cada sugerencia de IA se muestra junto al texto original con una explicación en lenguaje sencillo de por qué se recomienda el cambio y qué disposición legal la respalda. Acepta, edita en línea o rechaza — nada se aplica automáticamente.",
       bullets: [
-        "Side-by-side original vs. suggested text view",
-        "Plain-language rationale for every suggestion",
-        "Legal reference cited for each recommendation",
-        "Accept, edit, or reject each change individually",
-        "Full audit log of every decision you make",
+        "Vista lado a lado del texto original vs. sugerido",
+        "Explicación en lenguaje sencillo para cada sugerencia",
+        "Referencia legal citada para cada recomendación",
+        "Acepta, edita o rechaza cada cambio individualmente",
+        "Registro completo de auditoría de cada decisión que tomes",
       ],
-      badge: "You Stay in Control",
+      badge: "Tú Mantienes el Control",
     },
   },
   {
     number: "04",
-    title: "Export",
-    shortDesc: "Download your finalized, compliant document ready for official submission.",
+    title: "Exportar",
+    shortDesc: "Descarga tu documento finalizado y conforme, listo para presentación oficial.",
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
         <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -81,15 +81,15 @@ const steps = [
     ),
     expandedContent: {
       detail:
-        "Once you've reviewed and approved all changes, export your document in Word format — preserving all original formatting, headers, and clause numbering. The export includes a compliance summary report and a timestamped change log you can submit alongside the tender.",
+        "Una vez que hayas revisado y aprobado todos los cambios, exporta tu documento en formato Word — preservando todo el formato original, encabezados y numeración de cláusulas. La exportación incluye un informe de resumen de conformidad y un registro de cambios con marca de tiempo que puedes presentar junto a la licitación.",
       bullets: [
-        "Export as Word (.docx) preserving all formatting",
-        "Compliance summary report included",
-        "Timestamped audit trail of accepted changes",
-        "Ready for official portal submission",
-        "Re-export anytime if further edits are needed",
+        "Exportar como Word (.docx) preservando todo el formato",
+        "Informe de resumen de conformidad incluido",
+        "Registro de auditoría con marca de tiempo de cambios aceptados",
+        "Listo para presentación en portal oficial",
+        "Reexporta en cualquier momento si necesitas ediciones adicionales",
       ],
-      badge: "Submission Ready",
+      badge: "Listo para Presentación",
     },
   },
 ];
@@ -126,14 +126,14 @@ export default function Safe() {
             className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight"
             style={{ color: "#07162D", fontFamily: "'Georgia', serif", letterSpacing: "-0.02em" }}
           >
-            A Safer, More Efficient Way
+            Un Camino Más Seguro y Eficiente
           </motion.h2>
           <motion.p
             variants={fadeUp}
             className="mt-4 text-sm sm:text-base max-w-xl mx-auto leading-relaxed"
             style={{ color: "#424242" }}
           >
-            Four simple steps to go from raw document to a legally confident, submission-ready tender.
+            Cuatro pasos simples para ir de un documento sin procesar a una licitación confiable legalmente y lista para presentación.
           </motion.p>
         </motion.div>
 

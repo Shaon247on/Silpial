@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 const stats = [
-  { value: "80+", label: "Pages supported per document" },
-  { value: "100%", label: "Human approval required" },
-  { value: "BOE", label: "Official sources only" },
+  { value: "80+", label: "Páginas soportadas por documento" },
+  { value: "100%", label: "Aprobación humana requerida" },
+  { value: "BOE", label: "Solo fuentes oficiales" },
 ];
 
 const fadeUp = {
@@ -59,9 +59,9 @@ export default function Improve() {
             className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight max-w-3xl"
             style={{ fontFamily: "'Georgia', serif", letterSpacing: "-0.02em" }}
           >
-            Improve your tender{" "}
+            Mejora tu proceso de{" "}
             <span className="relative inline-block">
-              preparation process
+              preparación de licitación
               <motion.span
                 className="absolute -bottom-1 left-0 right-0 h-0.75 rounded-full bg-white/20"
                 initial={{ scaleX: 0 }}
@@ -78,8 +78,8 @@ export default function Improve() {
             className="text-sm sm:text-base max-w-xl leading-relaxed"
             style={{ color: "#797979" }}
           >
-            Secure, compliant, and designed exclusively for Spanish public administrations.
-            Reduce legal risk, save time, and submit tenders you can stand behind.
+            Seguro, cumplidor, y diseñado exclusivamente para administraciones públicas españolas.
+            Reduce riesgo legal, ahorra tiempo y presenta licitaciones con confianza.
           </motion.p>
 
           {/* Stats row */}
@@ -118,7 +118,7 @@ export default function Improve() {
               size="lg"
               className="bg-white hover:bg-gray-100 text-[#07162D] border-0 px-10 py-3 text-sm font-semibold shadow-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
             >
-              Get Started
+              Empezar
             </Button>
             </Link>
             <Link href={"/faq"}>
@@ -127,7 +127,7 @@ export default function Improve() {
               size="lg"
               className="border-white/20 text-white hover:bg-white/10 hover:border-white/30 bg-transparent px-10 py-3 text-sm font-semibold transition-all duration-200"
             >
-              Learn More
+              Aprender Más
             </Button>
             </Link>
           </motion.div>

@@ -17,7 +17,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Silpial",
-  description: "Prepare compliant tenders with confidence",
+  description: "Prepare licitaciones que cumplan con las normas con confianza",
 };
 
 export default function RootLayout({

@@ -119,13 +119,13 @@ export default function ProfileSettings() {
 
   const onProfileSubmit = (values: z.infer<typeof profileSchema>) => {
     console.log("Profile Data:", values);
-    toast.success("Profile updated (static demo)");
+    toast.success("Perfil actualizado (demostración estática)");
     setIsProfileEditing(false);
   };
 
   const onPasswordSubmit = (values: z.infer<typeof passwordSchema>) => {
     console.log("Password Data:", values);
-    toast.success("Password updated (static demo)");
+    toast.success("Contraseña actualizada (demostración estática)");
     passwordForm.reset();
     setIsPasswordEditing(false);
   };
