@@ -13,5 +13,3 @@ export interface Article {
   heading: string;
   body: string;
 }
-
-export type Category = "Todas las categorías" | "Contratos Públicos" | "Contratación" | "Reglamentos" | "Decretos";

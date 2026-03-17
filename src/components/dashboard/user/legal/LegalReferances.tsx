@@ -13,18 +13,13 @@ export default function LegalReferences() {
   const [selected, setSelected] = useState<LegalReference | null>(null);
 
   const handleSelect = (ref: LegalReference) => {
-    if (selected?.id === ref.id) {
-      setSelected(null);
-    } else {
-      setSelected(ref);
-    }
+    setSelected((prev) => (prev?.id === ref.id ? null : ref));
   };
 
   const handleClose = () => setSelected(null);
 
   return (
-    <div className="min-h-scree">
-      {/* header section  */}
+    <div className="min-h-screen">
       <div className="mb-6">
         <PageHeader
           title="Legal References"
@@ -35,15 +30,14 @@ export default function LegalReferences() {
           title="Verified Regulatory Framework"
         />
       </div>
-      {/* ── Split layout ── */}
 
-      <div className="max-w-480 mx-auto">
-        <div className="border border-gray-200 rounded-2xl bg-white overflow-hidden  shadow-sm md:max-h-[calc(100vh-220px)] flex">
-          {/* Left panel — Reference List */}
+      <div className="mx-auto max-w-[1400px]">
+        <div className="flex h-[calc(100vh-220px)] min-h-[600px] overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+          {/* Left panel */}
           <motion.div
             animate={{ width: selected ? "42%" : "100%" }}
             transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-            className="shrink-0 border-r border-gray-100 p-6 md:max-h-[calc(100vh-220px)] overflow-scroll"
+            className="h-full shrink-0 overflow-y-auto border-r border-gray-100 p-6"
             style={{ minWidth: 0 }}
           >
             <ReferenceList
@@ -53,19 +47,19 @@ export default function LegalReferences() {
             />
           </motion.div>
 
-          {/* Right panel — Law Detail */}
+          {/* Right panel */}
           <AnimatePresence initial={false}>
             {selected && (
               <motion.div
-                key="detail-panel"
+                key={selected.id}
                 initial={{ width: 0, opacity: 0 }}
                 animate={{ width: "58%", opacity: 1 }}
                 exit={{ width: 0, opacity: 0 }}
                 transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-                className="shrink-0 h-full overflow-hidden"
+                className="h-full shrink-0 overflow-hidden"
                 style={{ minWidth: 0 }}
               >
-                <div className="p-6 h-full overflow-hidden">
+                <div className="h-full overflow-y-auto p-6">
                   <LawDetail reference={selected} onClose={handleClose} />
                 </div>
               </motion.div>

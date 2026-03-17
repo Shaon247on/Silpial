@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import { Button } from "../ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import Link from "next/link";
+import { logoutAction } from "@/actions/auth.actions";
+import Logo from "../elements/Logo";
 
 interface NavbarProps {
   onMenuToggle?: () => void;
@@ -29,23 +31,7 @@ export default function Navbar({ onMenuToggle }: NavbarProps) {
           <Menu className="w-5 h-5 text-gray-600" />
         </button>
 
-        <div className="flex items-center gap-3">
-          {/* Logo */}
-          <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-[#07172D]">
-            <span className="text-white font-bold text-sm tracking-tight">
-              R
-            </span>
-          </div>
-          <div className="hidden sm:flex items-center gap-2">
-            <span className="font-semibold text-[#07172D] text-sm">
-              RedactAI
-            </span>
-            <div className="w-px h-5 bg-gray-300" />
-            <span className="text-gray-500 text-sm">
-              Public procurement office
-            </span>
-          </div>
-        </div>
+        <Logo/>
       </div>
 
       {/* Right: User + Logout */}
@@ -58,6 +44,7 @@ export default function Navbar({ onMenuToggle }: NavbarProps) {
         </Link>
         <Link href={"/"}>
           <Button
+          onClick={logoutAction}
             variant={"ghost"}
             className="flex items-center gap-2 text-sm font-medium text-[#07172D] hover:text-red-400 duration-300 transition-colors"
           >

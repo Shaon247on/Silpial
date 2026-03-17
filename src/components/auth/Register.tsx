@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Eye, EyeOff, Lock, Mail, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,6 +19,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { registerAction } from "@/actions/register.action";
 
 // ─── Schema ───────────────────────────────────────────────────────────────────
 
@@ -57,13 +58,12 @@ const requirements = [
 
 function PasswordStrength({ password }: { password: string }) {
   if (!password) return null;
+
   const passed = requirements.filter((r) => r.test(password)).length;
   const level = passed <= 1 ? 1 : passed <= 3 ? 2 : 3;
   const barColor = ["", "bg-red-400", "bg-amber-400", "bg-green-500"][level];
   const label = ["", "Débil", "Aceptable", "Fuerte"][level];
-  const lblColor = ["", "text-red-500", "text-amber-500", "text-green-600"][
-    level
-  ];
+  const lblColor = ["", "text-red-500", "text-amber-500", "text-green-600"][level];
 
   return (
     <motion.div
@@ -71,7 +71,6 @@ function PasswordStrength({ password }: { password: string }) {
       animate={{ opacity: 1, y: 0 }}
       className="mt-2 space-y-2"
     >
-      {/* Bar */}
       <div className="flex items-center gap-1.5">
         {[1, 2, 3].map((i) => (
           <div
@@ -81,18 +80,18 @@ function PasswordStrength({ password }: { password: string }) {
             }`}
           />
         ))}
-        <span className={`text-[10px] font-semibold w-8 ${lblColor}`}>
-          {label}
-        </span>
+        <span className={`w-8 text-[10px] font-semibold ${lblColor}`}>{label}</span>
       </div>
-      {/* Checklist */}
+
       <div className="grid grid-cols-2 gap-1">
         {requirements.map((req) => {
           const ok = req.test(password);
           return (
             <div key={req.label} className="flex items-center gap-1.5">
               <svg
-                className={`w-3 h-3 flex-shrink-0 transition-colors ${ok ? "text-green-500" : "text-gray-300"}`}
+                className={`h-3 w-3 flex-shrink-0 transition-colors ${
+                  ok ? "text-green-500" : "text-gray-300"
+                }`}
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="3"
@@ -101,7 +100,9 @@ function PasswordStrength({ password }: { password: string }) {
                 <path d="M5 13l4 4L19 7" />
               </svg>
               <span
-                className={`text-[10px] transition-colors ${ok ? "text-green-600" : "text-gray-400"}`}
+                className={`text-[10px] transition-colors ${
+                  ok ? "text-green-600" : "text-gray-400"
+                }`}
               >
                 {req.label}
               </span>
@@ -116,44 +117,56 @@ function PasswordStrength({ password }: { password: string }) {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function RegisterPage() {
-  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [serverError, setServerError] = useState("");
+  const [isPending, startTransition] = useTransition();
 
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
-    defaultValues: { email: "", password: "", confirmPassword: "" },
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
     mode: "onChange",
   });
 
   const password = form.watch("password");
-  const confirm = form.watch("confirmPassword");
 
   function onSubmit(data: RegisterFormValues) {
-    setIsLoading(true);
-    console.log(data);
-    setTimeout(() => {
-      setIsLoading(false);
-      router.push("/dashboard");
-    }, 1500);
+    setServerError("");
+
+    const formData = new FormData();
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+    formData.append("password_confirm", data.confirmPassword);
+
+    startTransition(async () => {
+      const result = await registerAction(formData);
+
+      if (!result.success) {
+        setServerError(result.error ?? "No se pudo completar el registro.");
+      }
+    });
   }
 
   return (
     <div>
       <h1
-        className="text-2xl font-bold text-[#07162D] mb-1"
+        className="mb-1 text-2xl font-bold text-[#07162D]"
         style={{ fontFamily: "'Georgia', serif" }}
       >
         Crea tu cuenta
       </h1>
-      <p className="text-sm text-gray-400 mb-8">
+
+      <p className="mb-8 text-sm text-gray-400">
         Únete a RedactAI y comienza a preparar licitaciones conformes.
       </p>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-          {/* ── Email ── */}
           <FormField
             control={form.control}
             name="name"
@@ -164,12 +177,13 @@ export default function RegisterPage() {
                 </FormLabel>
                 <FormControl>
                   <div className="relative">
-                    <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                    <User className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                     <Input
                       {...field}
                       type="text"
                       placeholder="Ingresa nombre"
-                      className="pl-10 h-12 rounded-xl border-gray-200 focus-visible:ring-[#07162D]/20 focus-visible:border-[#07172D] text-[#07162D] placeholder:text-gray-400"
+                      disabled={isPending}
+                      className="h-12 rounded-xl border-gray-200 pl-10 text-[#07162D] placeholder:text-gray-400 focus-visible:border-[#07172D] focus-visible:ring-[#07162D]/20"
                     />
                   </div>
                 </FormControl>
@@ -177,6 +191,7 @@ export default function RegisterPage() {
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="email"
@@ -187,12 +202,14 @@ export default function RegisterPage() {
                 </FormLabel>
                 <FormControl>
                   <div className="relative">
-                    <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                    <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                     <Input
                       {...field}
                       type="email"
                       placeholder="Ingresa correo"
-                      className="pl-10 h-12 rounded-xl border-gray-200 focus-visible:ring-[#07162D]/20 focus-visible:border-[#07172D] text-[#07162D] placeholder:text-gray-400"
+                      autoComplete="email"
+                      disabled={isPending}
+                      className="h-12 rounded-xl border-gray-200 pl-10 text-[#07162D] placeholder:text-gray-400 focus-visible:border-[#07172D] focus-visible:ring-[#07162D]/20"
                     />
                   </div>
                 </FormControl>
@@ -201,7 +218,6 @@ export default function RegisterPage() {
             )}
           />
 
-          {/* ── Password ── */}
           <FormField
             control={form.control}
             name="password"
@@ -212,22 +228,25 @@ export default function RegisterPage() {
                 </FormLabel>
                 <FormControl>
                   <div className="relative">
-                    <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                    <Lock className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                     <Input
                       {...field}
                       type={showPassword ? "text" : "password"}
                       placeholder="Ingresa contraseña"
-                      className="pl-10 pr-10 h-12 rounded-xl border-gray-200 focus-visible:ring-[#07162D]/20 focus-visible:border-[#07162D] text-[#07162D] placeholder:text-gray-400"
+                      autoComplete="new-password"
+                      disabled={isPending}
+                      className="h-12 rounded-xl border-gray-200 pl-10 pr-10 text-[#07162D] placeholder:text-gray-400 focus-visible:border-[#07162D] focus-visible:ring-[#07162D]/20"
                     />
                     <button
                       type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#07162D] transition-colors"
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      disabled={isPending}
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 transition-colors hover:text-[#07162D]"
                     >
                       {showPassword ? (
-                        <EyeOff className="w-4 h-4" />
+                        <EyeOff className="h-4 w-4" />
                       ) : (
-                        <Eye className="w-4 h-4" />
+                        <Eye className="h-4 w-4" />
                       )}
                     </button>
                   </div>
@@ -238,7 +257,6 @@ export default function RegisterPage() {
             )}
           />
 
-          {/* ── Confirm Password ── */}
           <FormField
             control={form.control}
             name="confirmPassword"
@@ -249,37 +267,40 @@ export default function RegisterPage() {
                 </FormLabel>
                 <FormControl>
                   <div className="relative">
-                    <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                    <Lock className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                     <Input
                       {...field}
                       type={showConfirm ? "text" : "password"}
                       placeholder="Reingresa contraseña"
-                      className="pl-10 pr-10 h-12 rounded-xl border-gray-200 focus-visible:ring-[#07162D]/20 focus-visible:border-[#07162D] text-[#07162D] placeholder:text-gray-400"
+                      autoComplete="new-password"
+                      disabled={isPending}
+                      className="h-12 rounded-xl border-gray-200 pl-10 pr-10 text-[#07162D] placeholder:text-gray-400 focus-visible:border-[#07162D] focus-visible:ring-[#07162D]/20"
                     />
                     <button
                       type="button"
-                      onClick={() => setShowConfirm(!showConfirm)}
-                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#07162D] transition-colors"
+                      onClick={() => setShowConfirm((prev) => !prev)}
+                      disabled={isPending}
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 transition-colors hover:text-[#07162D]"
                     >
                       {showConfirm ? (
-                        <EyeOff className="w-4 h-4" />
+                        <EyeOff className="h-4 w-4" />
                       ) : (
-                        <Eye className="w-4 h-4" />
+                        <Eye className="h-4 w-4" />
                       )}
                     </button>
                   </div>
                 </FormControl>
-                {/* Match indicator */}
+
                 <AnimatePresence>
                   {field.value && field.value === password && (
                     <motion.p
                       initial={{ opacity: 0, y: -4 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
-                      className="text-xs text-green-600 flex items-center gap-1 mt-1"
+                      className="mt-1 flex items-center gap-1 text-xs text-green-600"
                     >
                       <svg
-                        className="w-3 h-3"
+                        className="h-3 w-3"
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="3"
@@ -291,24 +312,24 @@ export default function RegisterPage() {
                     </motion.p>
                   )}
                 </AnimatePresence>
+
                 <FormMessage className="text-xs" />
               </FormItem>
             )}
           />
 
-          {/* ── Submit ── */}
+          {serverError ? (
+            <p className="text-sm font-medium text-red-500">{serverError}</p>
+          ) : null}
+
           <Button
             type="submit"
-            disabled={isLoading}
-            className="w-full h-12 bg-[#0ea5e9] hover:bg-[#0284c7] text-white border-0 rounded-xl text-sm font-semibold transition-all duration-200 mt-1"
+            disabled={isPending}
+            className="mt-1 h-12 w-full rounded-xl border-0 bg-[#0ea5e9] text-sm font-semibold text-white transition-all duration-200 hover:bg-[#0284c7]"
           >
-            {isLoading ? (
+            {isPending ? (
               <span className="flex items-center justify-center gap-2">
-                <svg
-                  className="animate-spin w-4 h-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
+                <svg className="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24">
                   <circle
                     className="opacity-25"
                     cx="12"
@@ -323,7 +344,7 @@ export default function RegisterPage() {
                     d="M4 12a8 8 0 018-8v8z"
                   />
                 </svg>
-                Creando cuenta …
+                Creando cuenta…
               </span>
             ) : (
               "Registrarse"
@@ -332,12 +353,9 @@ export default function RegisterPage() {
         </form>
       </Form>
 
-      <p className="text-sm text-center text-gray-500 mt-6">
+      <p className="mt-6 text-center text-sm text-gray-500">
         ¿Ya tienes una cuenta?{" "}
-        <Link
-          href="/login"
-          className="font-bold text-[#07162D] hover:underline"
-        >
+        <Link href="/login" className="font-bold text-[#07162D] hover:underline">
           Inicia sesión
         </Link>
       </p>

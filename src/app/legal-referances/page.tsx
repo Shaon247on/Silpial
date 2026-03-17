@@ -1,10 +1,12 @@
 import LegalReferencesPage from '@/components/LegalReferencesPage/LegalReferencesPage'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 function page() {
   return (
     <div>
-      <LegalReferencesPage/>
+      <Suspense fallback={<div>Loading...</div>}>
+        <LegalReferencesPage/>
+      </Suspense>
     </div>
   )
 }

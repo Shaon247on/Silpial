@@ -1,113 +1,145 @@
 "use client";
 
-import { useState } from "react";
+import { useTransition } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { LegalReference } from "@/types/law.type";
+
+import type { ApiDocument, ApiCategory } from "@/types/Document.type";
+import LawDetail from "@/components/LegalReferencesPage/LawDetail";
+import PageHeader from "@/components/elements/PageHeader";
+import { LawAlert } from "@/components/elements/LawAlert";
 import ReferenceList from "./Referencelist";
-import { legalReferences } from "@/data/LawData";
-import LawDetail from "./LawDetail";
 
-export default function LegalReferencesPage() {
-  const [selected, setSelected] = useState<LegalReference | null>(null);
+interface Props {
+  documents: ApiDocument[];
+  totalCount: number;
+  currentPage: number;
+  currentSearch: string;
+  currentCategory: string;
+  selectedDocument: ApiDocument | null;
+  initialCategories: ApiCategory[];
+  initialCategoriesHasMore: boolean;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+}
 
-  const handleSelect = (ref: LegalReference) => {
-    if (selected?.id === ref.id) {
-      setSelected(null);
-    } else {
-      setSelected(ref);
+export default function LegalReferencesPage({
+  documents,
+  totalCount,
+  currentPage,
+  currentSearch,
+  currentCategory,
+  selectedDocument,
+  initialCategories,
+  initialCategoriesHasMore,
+  hasNextPage,
+  hasPreviousPage,
+}: Props) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const [isPending, startTransition] = useTransition();
+
+  const selectedId = selectedDocument?.id ?? null;
+
+  function updateParams(next: {
+    search?: string;
+    category?: string;
+    selected?: string | null;
+    page?: number;
+  }) {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (typeof next.search !== "undefined") {
+      if (next.search.trim()) params.set("search", next.search.trim());
+      else params.delete("search");
     }
-  };
 
-  const handleClose = () => setSelected(null);
+    if (typeof next.category !== "undefined") {
+      if (next.category) params.set("category", next.category);
+      else params.delete("category");
+    }
+
+    if (typeof next.selected !== "undefined") {
+      if (next.selected) params.set("selected", next.selected);
+      else params.delete("selected");
+    }
+
+    if (typeof next.page !== "undefined") {
+      if (next.page > 1) params.set("page", String(next.page));
+      else params.delete("page");
+    }
+
+    startTransition(() => {
+      const query = params.toString();
+      router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+    });
+  }
 
   return (
-    <div className="min-h-screen bg-white">
-      <section
-        className="relative py-40 px-4 sm:px-6 lg:px-8 overflow-hidden"
-        style={{ backgroundColor: "#09182F" }}
-      >
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)",
-            backgroundSize: "48px 48px",
-          }}
+    <div className="min-h-[calc(100vh-200px)]">
+      <div className="mb-6">
+        <PageHeader
+          title="Legal References"
+          subtitle="Browse and read official tender laws uploaded for reference."
         />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-100 h-100 rounded-full bg-blue-500 blur-[100px] opacity-10 pointer-events-none" />
-        <div className="relative z-10 max-w-2xl mx-auto text-center">
+        <LawAlert
+          subtitle="All laws and regulations are officially uploaded by platform administrators and sourced from authenticated legal references."
+          title="Verified Regulatory Framework"
+        />
+      </div>
+
+      <div className="mx-auto max-w-[1400px]">
+        <div className="flex h-[calc(100vh-300px)] min-h-[600px] overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
-            <span className="inline-flex items-center gap-2 text-xs font-medium text-white/50 border border-white/10 rounded-full px-4 py-1.5 bg-white/5 tracking-widest uppercase mb-6">
-              All Legal References are here
-            </span>
-            <h1
-              className="text-4xl sm:text-5xl font-bold text-white leading-tight mb-4"
-              style={{
-                fontFamily: "'Georgia', serif",
-                letterSpacing: "-0.02em",
-              }}
-            >
-              Legal References
-            </h1>
-            <p className="text-base text-white/50 leading-relaxed">
-              Comprehensive legal frameworks and regulatory guidelines
-              supporting compliant public tender preparation.
-            </p>
-            <div className="mt-8 flex items-start gap-3 border border-white/10 bg-white/5 backdrop-blur-sm rounded-xl px-5 py-4">
-              <svg
-                className="w-5 h-5 text-blue-400 shrink-0 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-              >
-                <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-
-              <p className="text-sm text-white/70 leading-relaxed">
-                Todas las leyes son cargadas por el administrador de la plataforma y provienen de referencias legales oficiales.
-              </p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── Split layout ── */}
-
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 py-10">
-        <div className="border border-gray-200 rounded-2xl overflow-hidden bg-white shadow-sm h-[680px] flex">
-          {/* Left panel — Reference List */}
-          <motion.div
-            animate={{ width: selected ? "42%" : "100%" }}
+            animate={{ width: selectedId ? "42%" : "100%" }}
             transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-            className="shrink-0 border-r border-gray-100 p-6 h-full overflow-hidden"
+            className="h-full shrink-0 overflow-hidden border-r border-gray-100 p-6"
             style={{ minWidth: 0 }}
           >
             <ReferenceList
-              references={legalReferences}
-              selectedId={selected?.id ?? null}
-              onSelect={handleSelect}
+              documents={documents}
+              selectedId={selectedId}
+              currentSearch={currentSearch}
+              currentCategory={currentCategory}
+              initialCategories={initialCategories}
+              initialCategoriesHasMore={initialCategoriesHasMore}
+              isLoading={isPending}
+              totalCount={totalCount}
+              currentPage={currentPage}
+              hasNextPage={hasNextPage}
+              hasPreviousPage={hasPreviousPage}
+              onSearchChange={(value) =>
+                updateParams({ search: value, page: 1, selected: null })
+              }
+              onCategoryChange={(value) =>
+                updateParams({ category: value, page: 1, selected: null })
+              }
+              onSelect={(id) =>
+                updateParams({ selected: selectedId === id ? null : id })
+              }
+              onPageChange={(page) =>
+                updateParams({ page, selected: null })
+              }
             />
           </motion.div>
 
-          {/* Right panel — Law Detail */}
           <AnimatePresence initial={false}>
-            {selected && (
+            {selectedDocument && (
               <motion.div
                 key="detail-panel"
                 initial={{ width: 0, opacity: 0 }}
                 animate={{ width: "58%", opacity: 1 }}
                 exit={{ width: 0, opacity: 0 }}
                 transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-                className="shrink-0 h-full overflow-hidden"
+                className="h-full shrink-0 overflow-hidden"
                 style={{ minWidth: 0 }}
               >
-                <div className="p-6 h-full overflow-hidden">
-                  <LawDetail reference={selected} onClose={handleClose} />
+                <div className="flex h-full flex-col overflow-hidden p-6">
+                  <LawDetail
+                    document={selectedDocument}
+                    onClose={() => updateParams({ selected: null })}
+                  />
                 </div>
               </motion.div>
             )}

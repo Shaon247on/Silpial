@@ -5,6 +5,7 @@ import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Logo from "../elements/Logo";
 
 export default function NavBar() {
   const pathname = usePathname();
@@ -72,27 +73,7 @@ export default function NavBar() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
               {/* Logo */}
-              <motion.a
-                href="/"
-                className="flex items-center gap-2 flex-shrink-0"
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 400 }}
-              >
-                <div className="flex items-center gap-1.5">
-                  <div className="w-7 h-7 rounded-md bg-red-600 flex items-center justify-center">
-                    <span className="text-white text-xs font-bold tracking-tight">
-                      R
-                    </span>
-                  </div>
-                  <span
-                    className={`font-semibold text-base tracking-tight transition-colors duration-300 ${
-                      scrolled ? "text-[#07162D]" : "text-white"
-                    }`}
-                  >
-                    RedactAI
-                  </span>
-                </div>
-              </motion.a>
+              <Logo/>
 
               {/* Desktop Nav Links */}
               <nav className="hidden md:flex items-center gap-8">
@@ -141,7 +122,7 @@ export default function NavBar() {
                         : "border-white text-white hover:bg-white hover:text-[#07162D] bg-transparent"
                     }`}
                   >
-                    Login
+                    Inicia sesión
                   </Button>
                 </Link>
                 <Link href="/register">

@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
+
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,6 +19,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { loginAction } from "@/actions/auth.actions";
 
 // ── Zod Schema ────────────────────────────────────────────────────────────────
 
@@ -36,9 +37,9 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export default function LoginPage() {
-  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [serverError, setServerError] = useState<string>("");
+  const [isPending, startTransition] = useTransition();
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -50,30 +51,46 @@ export default function LoginPage() {
     mode: "onChange",
   });
 
-  function onSubmit(data: LoginFormValues) {
-    setIsLoading(true);
-    console.log(data);
-    setTimeout(() => {
-      setIsLoading(false);
-      router.push("/dashboard");
-    }, 1500);
-  }
+  const onSubmit = (data: LoginFormValues) => {
+    setServerError("");
+
+    const formData = new FormData();
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+    formData.append("rememberMe", String(!!data.rememberMe));
+
+    startTransition(async () => {
+      try {
+        await loginAction(formData);
+        // No router.push here.
+        // No setTimeout here.
+        // redirect() inside loginAction will handle navigation.
+      } catch (error) {
+        const message =
+          error instanceof Error
+            ? error.message
+            : "Unable to sign in. Please try again.";
+
+        setServerError(message);
+      }
+    });
+  };
 
   return (
     <div>
       <h1
-        className="text-2xl font-bold text-[#07162D] mb-1"
+        className="mb-1 text-2xl font-bold text-[#07162D]"
         style={{ fontFamily: "'Georgia', serif" }}
       >
         Bienvenido de vuelta
       </h1>
-      <p className="text-sm text-gray-400 mb-8">
+
+      <p className="mb-8 text-sm text-gray-400">
         Inicia sesión en tu cuenta de RedactAI.
       </p>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-
           {/* Email */}
           <FormField
             control={form.control}
@@ -85,12 +102,14 @@ export default function LoginPage() {
                 </FormLabel>
                 <FormControl>
                   <div className="relative">
-                    <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                    <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                     <Input
                       {...field}
                       type="email"
                       placeholder="Ingresa correo"
-                      className="pl-10 h-12 rounded-xl border-gray-200 focus:border-[#07162D] focus:ring-[#07162D]/20 text-[#07162D] placeholder:text-gray-400"
+                      autoComplete="email"
+                      disabled={isPending}
+                      className="h-12 rounded-xl border-gray-200 pl-10 text-[#07162D] placeholder:text-gray-400 focus:border-[#07162D] focus:ring-[#07162D]/20"
                     />
                   </div>
                 </FormControl>
@@ -111,33 +130,38 @@ export default function LoginPage() {
                   </FormLabel>
                   <Link
                     href="/forgot-password"
-                    className="text-xs text-[#0ea5e9] hover:underline font-medium"
+                    className="text-xs font-medium text-[#0ea5e9] hover:underline"
                   >
                     ¿Olvidaste tu contraseña?
                   </Link>
                 </div>
+
                 <FormControl>
                   <div className="relative">
-                    <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                    <Lock className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                     <Input
                       {...field}
                       type={showPassword ? "text" : "password"}
                       placeholder="Ingresa contraseña"
-                      className="pl-10 pr-10 h-12 rounded-xl border-gray-200 focus:border-[#07162D] focus:ring-[#07162D]/20 text-[#07162D] placeholder:text-gray-400"
+                      autoComplete="current-password"
+                      disabled={isPending}
+                      className="h-12 rounded-xl border-gray-200 pl-10 pr-10 text-[#07162D] placeholder:text-gray-400 focus:border-[#07162D] focus:ring-[#07162D]/20"
                     />
                     <button
                       type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#07162D] transition-colors"
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      disabled={isPending}
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 transition-colors hover:text-[#07162D]"
                     >
                       {showPassword ? (
-                        <EyeOff className="w-4 h-4" />
+                        <EyeOff className="h-4 w-4" />
                       ) : (
-                        <Eye className="w-4 h-4" />
+                        <Eye className="h-4 w-4" />
                       )}
                     </button>
                   </div>
                 </FormControl>
+
                 <FormMessage className="text-xs" />
               </FormItem>
             )}
@@ -153,26 +177,42 @@ export default function LoginPage() {
                   <Checkbox
                     checked={field.value}
                     onCheckedChange={field.onChange}
-                    className="border-gray-300 data-[state=checked]:bg-[#07162D] data-[state=checked]:border-[#07162D]"
+                    disabled={isPending}
+                    className="border-gray-300 data-[state=checked]:border-[#07162D] data-[state=checked]:bg-[#07162D]"
                   />
                 </FormControl>
-                <FormLabel className="text-sm text-gray-500 font-normal cursor-pointer">
+                <FormLabel className="cursor-pointer text-sm font-normal text-gray-500">
                   Recuérdame por 30 días
                 </FormLabel>
               </FormItem>
             )}
           />
 
+          {serverError ? (
+            <p className="text-sm font-medium text-red-500">{serverError}</p>
+          ) : null}
+
           <Button
             type="submit"
-            disabled={isLoading}
-            className="w-full h-12 bg-[#0ea5e9] hover:bg-[#0284c7] text-white border-0 rounded-xl text-sm font-semibold transition-all duration-200"
+            disabled={isPending}
+            className="h-12 w-full rounded-xl border-0 bg-[#0ea5e9] text-sm font-semibold text-white transition-all duration-200 hover:bg-[#0284c7]"
           >
-            {isLoading ? (
+            {isPending ? (
               <span className="flex items-center justify-center gap-2">
-                <svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                <svg className="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v8z"
+                  />
                 </svg>
                 Iniciando sesión…
               </span>
@@ -183,7 +223,7 @@ export default function LoginPage() {
         </form>
       </Form>
 
-      <p className="text-sm text-center text-gray-500 mt-6">
+      <p className="mt-6 text-center text-sm text-gray-500">
         ¿No tienes una cuenta?{" "}
         <Link href="/register" className="font-bold text-[#07162D] hover:underline">
           Registrarse

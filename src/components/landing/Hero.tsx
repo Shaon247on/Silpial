@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Logo from "../elements/Logo";
 
 // Floating particle dots for background ambiance
 const particles = Array.from({ length: 18 }, (_, i) => ({
@@ -27,22 +28,7 @@ function DashboardMockup() {
     <div className="w-full max-w-2xl mx-auto rounded-2xl overflow-hidden shadow-2xl border border-white/10">
       {/* Top navbar */}
       <div className="bg-white border-b border-gray-200 px-4 py-2.5 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-5 h-5 rounded bg-[#07162D] flex items-center justify-center">
-            <span className="text-white font-bold" style={{ fontSize: 7 }}>
-              R
-            </span>
-          </div>
-          <span
-            className="font-semibold text-[#07162D]"
-            style={{ fontSize: 10 }}
-          >
-            RedactAI
-          </span>
-          <span className="ml-3 text-gray-400" style={{ fontSize: 9 }}>
-            Public procurement office
-          </span>
-        </div>
+        <Logo/>
         <div className="flex items-center gap-2">
           <div className="w-5 h-5 rounded-full bg-gray-200" />
           <div
@@ -366,6 +352,7 @@ export default function Hero() {
             </Link>
             <Link href={"/how-it-works"}>
             <Button
+            className="text-white"
               variant="outline"
               size="lg"
             >
