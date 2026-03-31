@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
+import Logo from "../elements/Logo";
 
 const footerLinks = {
   Empresa: [
@@ -146,14 +147,7 @@ export default function Footer() {
               <motion.div variants={fadeUp} className="lg:col-span-2">
                 {/* Logo */}
                 <div className="flex items-center gap-2 mb-4">
-                  <div className="w-8 h-8 rounded-lg bg-[#07162D] flex items-center justify-center">
-                    <span className="text-white text-sm font-bold tracking-tight">
-                      R
-                    </span>
-                  </div>
-                  <span className="font-bold text-lg text-[#07162D] tracking-tight">
-                    RedactAI
-                  </span>
+                  <Logo/>
                 </div>
 
                 <p className="text-sm leading-relaxed text-gray-500 max-w-xs mb-6">

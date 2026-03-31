@@ -3,8 +3,8 @@ import Link from "next/link";
 
 function Logo() {
   return (
-    <Link href={"/"}>
-      <div className="rounded-lg overflow-hidden">
+    <Link href={"/"} className="">
+      <div className="rounded-lg overflow-hidden w-fit ">
         <Image
         src={"/logo.png"}
         alt="Logo Image"

@@ -99,15 +99,16 @@ export default function Designed() {
             className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight"
             style={{ fontFamily: "'Georgia', serif", letterSpacing: "-0.02em" }}
           >
-            Designed For Legal Confidence
+            Diseñado para brindar confianza legal
           </motion.h2>
           <motion.p
             variants={fadeUp}
             className="mt-4 text-sm sm:text-base max-w-xl mx-auto leading-relaxed"
             style={{ color: "#797979" }}
           >
-            We prioritize institutional credibility over automation. Every
-            suggestion is auditable, transparent, and based on official sources.
+            Priorizamos la credibilidad institucional sobre la automatización.
+            Cada sugerencia es auditable, transparente y se basa en fuentes
+            oficiales.
           </motion.p>
         </motion.div>
 

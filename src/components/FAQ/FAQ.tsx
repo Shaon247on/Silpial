@@ -34,8 +34,7 @@ export default function FAQPage() {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <span className="inline-flex items-center gap-2 text-xs font-medium text-white/50 border border-white/10 rounded-full px-4 py-1.5 bg-white/5 tracking-widest uppercase mb-6">
-              {faqData.reduce((acc, c) => acc + c.items.length, 0)} questions
-              answered
+              {faqData.reduce((acc, c) => acc + c.items.length, 0)} preguntas respondidas
             </span>
             <h1
               className="text-4xl sm:text-5xl font-bold text-white leading-tight mb-4"

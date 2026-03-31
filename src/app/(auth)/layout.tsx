@@ -18,7 +18,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       <motion.div
         layout
         transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
-        className="relative flex items-center justify-center w-1/2 flex-shrink-0 bg-white z-10"
+        className="relative flex items-center justify-center w-1/2 shrink-0 bg-white z-10"
         style={{ order: imageOnLeft ? 1 : 0 }}
       >
         <AnimatePresence mode="wait" initial={false}>
@@ -42,7 +42,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       <motion.div
         layout
         transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
-        className="relative w-1/2 flex-shrink-0 overflow-hidden"
+        className="relative w-1/2 shrink-0 overflow-hidden"
         style={{ order: imageOnLeft ? 0 : 1 }}
       >
         <div

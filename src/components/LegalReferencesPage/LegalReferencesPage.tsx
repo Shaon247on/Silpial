@@ -9,6 +9,7 @@ import LawDetail from "@/components/LegalReferencesPage/LawDetail";
 import PageHeader from "@/components/elements/PageHeader";
 import { LawAlert } from "@/components/elements/LawAlert";
 import ReferenceList from "./Referencelist";
+import Link from "next/link";
 
 interface Props {
   documents: ApiDocument[];
@@ -72,24 +73,52 @@ export default function LegalReferencesPage({
 
     startTransition(() => {
       const query = params.toString();
-      router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+      router.replace(query ? `${pathname}?${query}` : pathname, {
+        scroll: false,
+      });
     });
   }
 
   return (
     <div className="min-h-[calc(100vh-200px)]">
-      <div className="mb-6">
-        <PageHeader
-          title="Legal References"
-          subtitle="Browse and read official tender laws uploaded for reference."
+      <section
+        className="relative py-40 px-4 sm:px-6 lg:px-8 overflow-hidden"
+        style={{ backgroundColor: "#09182F" }}
+      >
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
         />
-        <LawAlert
-          subtitle="All laws and regulations are officially uploaded by platform administrators and sourced from authenticated legal references."
-          title="Verified Regulatory Framework"
-        />
-      </div>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-100 h-100 rounded-full bg-blue-500 blur-[100px] opacity-10 pointer-events-none" />
+        <div className="relative z-10 max-w-2xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <h1
+              className="text-4xl sm:text-5xl font-bold text-white leading-tight mb-4"
+              style={{
+                fontFamily: "'Georgia', serif",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              Referencias Legales
+            </h1>
+            <p className="text-base text-white/50 leading-relaxed">
+              Browse and read official tender laws uploaded for reference.
+              Consulte y lea las leyes oficiales de licitación que se han subido
+              para su referencia.
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
-      <div className="mx-auto max-w-[1400px]">
+      <div className="mx-auto max-w-[1400px] my-10">
         <div className="flex h-[calc(100vh-300px)] min-h-[600px] overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
           <motion.div
             animate={{ width: selectedId ? "42%" : "100%" }}
@@ -118,9 +147,7 @@ export default function LegalReferencesPage({
               onSelect={(id) =>
                 updateParams({ selected: selectedId === id ? null : id })
               }
-              onPageChange={(page) =>
-                updateParams({ page, selected: null })
-              }
+              onPageChange={(page) => updateParams({ page, selected: null })}
             />
           </motion.div>
 

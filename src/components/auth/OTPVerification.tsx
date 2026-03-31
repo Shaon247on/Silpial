@@ -2,11 +2,11 @@
 
 import { useEffect, useRef, useState, useTransition } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { motion, AnimatePresence } from "framer-motion";
-
 
 import { Button } from "@/components/ui/button";
 import {
@@ -15,7 +15,9 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+
 import { verifyOtpAction } from "@/actions/verify-otp.action";
+import { forgetVerifyOtpAction } from "@/actions/forgot-verify-otp.action";
 
 const OTP_LENGTH = 6;
 const RESEND_SECONDS = 60;
@@ -31,7 +33,14 @@ const otpSchema = z.object({
 
 type OTPFormValues = z.infer<typeof otpSchema>;
 
-export default function OTPVerificationPage() {
+interface OTPVerificationPageProps {
+  mode: "signup" | "forgot-password";
+}
+
+export default function OTPVerificationPage({
+  mode,
+}: OTPVerificationPageProps) {
+  const router = useRouter();
   const [countdown, setCountdown] = useState(RESEND_SECONDS);
   const [resending, setResending] = useState(false);
   const [serverError, setServerError] = useState("");
@@ -61,10 +70,18 @@ export default function OTPVerificationPage() {
     formData.append("otp", data.digits.join(""));
 
     startTransition(async () => {
-      const result = await verifyOtpAction(formData);
+      const result =
+        mode === "forgot-password"
+          ? await forgetVerifyOtpAction(formData)
+          : await verifyOtpAction(formData);
 
       if (!result.success) {
         setServerError(result.error ?? "No se pudo verificar el código.");
+        return;
+      }
+
+      if (result.redirectTo) {
+        router.push(result.redirectTo);
       }
     });
   }

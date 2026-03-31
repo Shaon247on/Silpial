@@ -6,12 +6,12 @@ import { cookies } from "next/headers";
 import { env } from "@/lib/config/env";
 import { COOKIE } from "@/lib/auth/cookies";
 
-type VerifySignupOtpResponse = {
+type SetNewPasswordResponse = {
   success: boolean;
   message: string;
 };
 
-export type VerifyOtpActionResult = {
+export type SetNewPasswordActionResult = {
   success: boolean;
   error?: string;
   redirectTo?: string;
@@ -46,34 +46,34 @@ function extractAxiosError(error: unknown, fallback: string) {
   return fallback;
 }
 
-export async function verifyOtpAction(
+export async function setNewPasswordAction(
   formData: FormData
-): Promise<VerifyOtpActionResult> {
-  const otp = String(formData.get("otp") ?? "").trim();
+): Promise<SetNewPasswordActionResult> {
+  const newPassword = String(formData.get("new_password") ?? "").trim();
 
-  if (!otp || otp.length !== 6) {
+  if (!newPassword) {
     return {
       success: false,
-      error: "Por favor ingresa el código de 6 dígitos.",
+      error: "New password is required.",
     };
   }
 
   const store = await cookies();
-  const verificationToken = store.get(COOKIE.verification)?.value;
+  const passwordResetVerified = store.get(COOKIE.passwordResetVerified)?.value;
 
-  if (!verificationToken) {
+  if (!passwordResetVerified) {
     return {
       success: false,
-      error: "La sesión de verificación expiró. Solicita un nuevo código.",
+      error: "Your reset session has expired. Please restart the forgot password process.",
     };
   }
 
   try {
-    const res = await axios.post<VerifySignupOtpResponse>(
-      `${env.BACKEND_BASE_URL}/auth/verify-otp/`,
+    const res = await axios.post<SetNewPasswordResponse>(
+      `${env.BACKEND_BASE_URL}/auth/forgot-password/set/`,
       {
-        otp,
-        verificationToken,
+        passwordResetVerified,
+        new_password: newPassword,
       },
       {
         headers: {
@@ -88,11 +88,11 @@ export async function verifyOtpAction(
     if (!data.success) {
       return {
         success: false,
-        error: data.message || "No se pudo verificar el código.",
+        error: data.message || "Failed to reset password.",
       };
     }
 
-    store.delete(COOKIE.verification);
+    store.delete(COOKIE.passwordResetVerified);
 
     return {
       success: true,
@@ -101,7 +101,7 @@ export async function verifyOtpAction(
   } catch (error) {
     return {
       success: false,
-      error: extractAxiosError(error, "No se pudo verificar el código."),
+      error: extractAxiosError(error, "Failed to reset password."),
     };
   }
 }

@@ -7,33 +7,51 @@ import { useRef } from "react";
 const cards = [
   {
     icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <svg
+        className="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+      >
         <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
       </svg>
     ),
-    title: "Sensitive Data",
+    title: "Datos Sensibles",
     description:
-      "Public procurement documents are long, complex, and carry significant legal weight.",
+      "Los documentos de contratación pública son extensos, complejos y tienen un importante peso legal.",
   },
   {
     icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <svg
+        className="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+      >
         <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
       </svg>
     ),
-    title: "Changing Regulations",
+    title: "Normativa Cambiante",
     description:
-      "Keeping up with the latest modifications in Spanish procurement law is a constant challenge.",
+      "Mantenerse al día con las últimas modificaciones en la legislación española de contratación es un reto constante.",
   },
   {
     icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <svg
+        className="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+      >
         <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
       </svg>
     ),
-    title: "Manual Risk",
+    title: "Riesgo Manual",
     description:
-      "Human error in manual drafting can lead to impugned tenders and administrative delays.",
+      "Los errores humanos en la redacción manual pueden provocar impugnaciones y retrasos administrativos.",
   },
 ];
 
@@ -74,11 +92,15 @@ export default function Documents() {
           <motion.h2
             variants={fadeUp}
             className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight font-poppins"
-            style={{ color: "#07162D", fontFamily: "'Georgia', serif", letterSpacing: "-0.02em" }}
+            style={{
+              color: "#07162D",
+              fontFamily: "'Georgia', serif",
+              letterSpacing: "-0.02em",
+            }}
           >
-            Preparing Tender Documents Is{" "}
+            La preparación de los documentos de{" "}
             <br className="hidden sm:block" />
-            Complex And Risky
+            licitación es compleja y arriesgada.
           </motion.h2>
 
           <motion.p
@@ -86,7 +108,8 @@ export default function Documents() {
             className="mt-4 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed"
             style={{ color: "#797979" }}
           >
-            Manual drafting increases legal procedural risk and consumes valuable time.
+            La redacción manual aumenta el riesgo procesal legal y consume un
+            tiempo valioso.
           </motion.p>
         </motion.div>
 
@@ -137,7 +160,11 @@ export default function Documents() {
                 style={{ backgroundColor: "#07162D" }}
                 initial={{ scaleX: 0, originX: 0 }}
                 animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 + i * 0.12, ease: "easeOut" }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.4 + i * 0.12,
+                  ease: "easeOut",
+                }}
               />
             </motion.div>
           ))}

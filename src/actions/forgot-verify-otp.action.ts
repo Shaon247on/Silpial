@@ -4,14 +4,15 @@ import axios from "axios";
 import { cookies } from "next/headers";
 
 import { env } from "@/lib/config/env";
-import { COOKIE } from "@/lib/auth/cookies";
+import { COOKIE, cookieBaseOptions } from "@/lib/auth/cookies";
 
-type VerifySignupOtpResponse = {
+type VerifyForgotPasswordOtpResponse = {
   success: boolean;
   message: string;
+  passwordResetVerified: string;
 };
 
-export type VerifyOtpActionResult = {
+export type ForgetVerifyOtpActionResult = {
   success: boolean;
   error?: string;
   redirectTo?: string;
@@ -46,9 +47,9 @@ function extractAxiosError(error: unknown, fallback: string) {
   return fallback;
 }
 
-export async function verifyOtpAction(
+export async function forgetVerifyOtpAction(
   formData: FormData
-): Promise<VerifyOtpActionResult> {
+): Promise<ForgetVerifyOtpActionResult> {
   const otp = String(formData.get("otp") ?? "").trim();
 
   if (!otp || otp.length !== 6) {
@@ -59,21 +60,21 @@ export async function verifyOtpAction(
   }
 
   const store = await cookies();
-  const verificationToken = store.get(COOKIE.verification)?.value;
+  const passResetToken = store.get(COOKIE.passReset)?.value;
 
-  if (!verificationToken) {
+  if (!passResetToken) {
     return {
       success: false,
-      error: "La sesión de verificación expiró. Solicita un nuevo código.",
+      error: "La sesión de recuperación expiró. Solicita un nuevo código.",
     };
   }
 
   try {
-    const res = await axios.post<VerifySignupOtpResponse>(
-      `${env.BACKEND_BASE_URL}/auth/verify-otp/`,
+    const res = await axios.post<VerifyForgotPasswordOtpResponse>(
+      `${env.BACKEND_BASE_URL}/auth/forgot-password/verify-otp/`,
       {
+        passResetToken,
         otp,
-        verificationToken,
       },
       {
         headers: {
@@ -85,18 +86,25 @@ export async function verifyOtpAction(
 
     const data = res.data;
 
-    if (!data.success) {
+    if (!data.success || !data.passwordResetVerified) {
       return {
         success: false,
         error: data.message || "No se pudo verificar el código.",
       };
     }
 
-    store.delete(COOKIE.verification);
+    store.set({
+      name: COOKIE.passwordResetVerified,
+      value: data.passwordResetVerified,
+      ...cookieBaseOptions(),
+      maxAge: 60 * 10,
+    });
+
+    store.delete(COOKIE.passReset);
 
     return {
       success: true,
-      redirectTo: "/login",
+      redirectTo: "/new-password",
     };
   } catch (error) {
     return {

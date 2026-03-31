@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Eye, EyeOff, KeyRound, Lock } from "lucide-react";
+import { Eye, EyeOff, Lock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+
+import { setNewPasswordAction } from "@/actions/set-new-password.action";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,9 +25,7 @@ import {
 
 const newPasswordSchema = z
   .object({
-    password: z
-      .string()
-      .min(8, "Password must be at least 8 characters."),
+    password: z.string().min(8, "Password must be at least 8 characters."),
     confirmPassword: z.string().min(1, "Please confirm your password."),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -46,6 +46,7 @@ const requirements = [
 
 function PasswordStrength({ password }: { password: string }) {
   if (!password) return null;
+
   const passed = requirements.filter((r) => r.test(password)).length;
   const level = passed <= 1 ? 1 : passed <= 3 ? 2 : 3;
   const barColor = ["", "bg-red-400", "bg-amber-400", "bg-green-500"][level];
@@ -69,17 +70,20 @@ function PasswordStrength({ password }: { password: string }) {
             }`}
           />
         ))}
-        <span className={`text-[10px] font-semibold w-8 ${lblColor}`}>
+        <span className={`w-8 text-[10px] font-semibold ${lblColor}`}>
           {label}
         </span>
       </div>
+
       <div className="grid grid-cols-2 gap-1">
         {requirements.map((req) => {
           const ok = req.test(password);
           return (
             <div key={req.label} className="flex items-center gap-1.5">
               <svg
-                className={`w-3 h-3 flex-shrink-0 transition-colors ${ok ? "text-green-500" : "text-gray-300"}`}
+                className={`h-3 w-3 flex-shrink-0 transition-colors ${
+                  ok ? "text-green-500" : "text-gray-300"
+                }`}
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="3"
@@ -88,7 +92,9 @@ function PasswordStrength({ password }: { password: string }) {
                 <path d="M5 13l4 4L19 7" />
               </svg>
               <span
-                className={`text-[10px] transition-colors ${ok ? "text-green-600" : "text-gray-400"}`}
+                className={`text-[10px] transition-colors ${
+                  ok ? "text-green-600" : "text-gray-400"
+                }`}
               >
                 {req.label}
               </span>
@@ -104,10 +110,12 @@ function PasswordStrength({ password }: { password: string }) {
 
 export default function NewPasswordPage() {
   const router = useRouter();
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [done, setDone] = useState(false);
+  const [serverError, setServerError] = useState("");
+  const [isPending, startTransition] = useTransition();
 
   const form = useForm<NewPasswordFormValues>({
     resolver: zodResolver(newPasswordSchema),
@@ -116,20 +124,35 @@ export default function NewPasswordPage() {
   });
 
   const password = form.watch("password");
-  const confirm = form.watch("confirmPassword");
 
   function onSubmit(data: NewPasswordFormValues) {
-    setIsLoading(true);
-    console.log(data);
-    setTimeout(() => {
-      setIsLoading(false);
+    setServerError("");
+
+    const formData = new FormData();
+    formData.append("new_password", data.password);
+
+    startTransition(async () => {
+      const result = await setNewPasswordAction(formData);
+
+      if (!result.success) {
+        setServerError(result.error ?? "Failed to reset password.");
+        return;
+      }
+
       setDone(true);
-    }, 1500);
+
+      setTimeout(() => {
+        if (result.redirectTo) {
+          router.push(result.redirectTo);
+        } else {
+          router.push("/login");
+        }
+      }, 1200);
+    });
   }
 
   return (
     <AnimatePresence mode="wait">
-      {/* ── Form state ── */}
       {!done && (
         <motion.div
           key="form"
@@ -139,19 +162,19 @@ export default function NewPasswordPage() {
           transition={{ duration: 0.25 }}
         >
           <h1
-            className="text-2xl font-bold text-[#07162D] mb-1"
+            className="mb-1 text-2xl font-bold text-[#07162D]"
             style={{ fontFamily: "'Georgia', serif" }}
           >
             Crear nueva contraseña
           </h1>
-          <p className="text-sm text-gray-400 mb-8 leading-relaxed">
+
+          <p className="mb-8 text-sm leading-relaxed text-gray-400">
             Your new password must be different from your previous passwords and
             meet all requirements below.
           </p>
 
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-              {/* ── New password ── */}
               <FormField
                 control={form.control}
                 name="password"
@@ -162,22 +185,24 @@ export default function NewPasswordPage() {
                     </FormLabel>
                     <FormControl>
                       <div className="relative">
-                        <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                        <Lock className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                         <Input
                           {...field}
                           type={showPassword ? "text" : "password"}
                           placeholder="Enter new password"
-                          className="pl-10 pr-10 h-12 rounded-xl border-gray-200 focus-visible:ring-[#07162D]/20 focus-visible:border-[#07162D] text-[#07162D] placeholder:text-gray-400"
+                          disabled={isPending}
+                          className="h-12 rounded-xl border-gray-200 pl-10 pr-10 text-[#07162D] placeholder:text-gray-400 focus-visible:border-[#07162D] focus-visible:ring-[#07162D]/20"
                         />
                         <button
                           type="button"
-                          onClick={() => setShowPassword(!showPassword)}
-                          className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#07162D] transition-colors"
+                          onClick={() => setShowPassword((prev) => !prev)}
+                          disabled={isPending}
+                          className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 transition-colors hover:text-[#07162D]"
                         >
                           {showPassword ? (
-                            <EyeOff className="w-4 h-4" />
+                            <EyeOff className="h-4 w-4" />
                           ) : (
-                            <Eye className="w-4 h-4" />
+                            <Eye className="h-4 w-4" />
                           )}
                         </button>
                       </div>
@@ -188,7 +213,6 @@ export default function NewPasswordPage() {
                 )}
               />
 
-              {/* ── Confirm password ── */}
               <FormField
                 control={form.control}
                 name="confirmPassword"
@@ -199,37 +223,39 @@ export default function NewPasswordPage() {
                     </FormLabel>
                     <FormControl>
                       <div className="relative">
-                        <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                        <Lock className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                         <Input
                           {...field}
                           type={showConfirm ? "text" : "password"}
                           placeholder="Confirm new password"
-                          className="pl-10 pr-10 h-12 rounded-xl border-gray-200 focus-visible:ring-[#07162D]/20 focus-visible:border-[#07162D] text-[#07162D] placeholder:text-gray-400"
+                          disabled={isPending}
+                          className="h-12 rounded-xl border-gray-200 pl-10 pr-10 text-[#07162D] placeholder:text-gray-400 focus-visible:border-[#07162D] focus-visible:ring-[#07162D]/20"
                         />
                         <button
                           type="button"
-                          onClick={() => setShowConfirm(!showConfirm)}
-                          className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#07162D] transition-colors"
+                          onClick={() => setShowConfirm((prev) => !prev)}
+                          disabled={isPending}
+                          className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 transition-colors hover:text-[#07162D]"
                         >
                           {showConfirm ? (
-                            <EyeOff className="w-4 h-4" />
+                            <EyeOff className="h-4 w-4" />
                           ) : (
-                            <Eye className="w-4 h-4" />
+                            <Eye className="h-4 w-4" />
                           )}
                         </button>
                       </div>
                     </FormControl>
-                    {/* Live match indicator */}
+
                     <AnimatePresence>
                       {field.value && field.value === password && (
                         <motion.p
                           initial={{ opacity: 0, y: -4 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0 }}
-                          className="text-xs text-green-600 flex items-center gap-1 mt-1"
+                          className="mt-1 flex items-center gap-1 text-xs text-green-600"
                         >
                           <svg
-                            className="w-3 h-3"
+                            className="h-3 w-3"
                             fill="none"
                             stroke="currentColor"
                             strokeWidth="3"
@@ -241,21 +267,27 @@ export default function NewPasswordPage() {
                         </motion.p>
                       )}
                     </AnimatePresence>
+
                     <FormMessage className="text-xs" />
                   </FormItem>
                 )}
               />
 
-              {/* ── Submit ── */}
+              {serverError ? (
+                <p className="text-sm font-medium text-red-500">
+                  {serverError}
+                </p>
+              ) : null}
+
               <Button
                 type="submit"
-                disabled={isLoading}
-                className="w-full h-12 bg-[#0ea5e9] hover:bg-[#0284c7] text-white border-0 rounded-xl text-sm font-semibold transition-all duration-200 mt-1"
+                disabled={isPending}
+                className="mt-1 h-12 w-full rounded-xl border-0 bg-[#0ea5e9] text-sm font-semibold text-white transition-all duration-200 hover:bg-[#0284c7]"
               >
-                {isLoading ? (
+                {isPending ? (
                   <span className="flex items-center justify-center gap-2">
                     <svg
-                      className="animate-spin w-4 h-4"
+                      className="h-4 w-4 animate-spin"
                       fill="none"
                       viewBox="0 0 24 24"
                     >
@@ -284,18 +316,17 @@ export default function NewPasswordPage() {
         </motion.div>
       )}
 
-      {/* ── Success state ── */}
       {done && (
         <motion.div
           key="success"
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
-          className="flex flex-col items-center text-center gap-5 py-6"
+          className="flex flex-col items-center gap-5 py-6 text-center"
         >
-          <div className="w-16 h-16 rounded-full bg-green-50 border-2 border-green-200 flex items-center justify-center">
+          <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-green-200 bg-green-50">
             <svg
-              className="w-8 h-8 text-green-500"
+              className="h-8 w-8 text-green-500"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
@@ -304,23 +335,19 @@ export default function NewPasswordPage() {
               <path d="M5 13l4 4L19 7" />
             </svg>
           </div>
+
           <div>
             <h3
-              className="text-xl font-bold text-[#07162D] mb-2"
+              className="mb-2 text-xl font-bold text-[#07162D]"
               style={{ fontFamily: "'Georgia', serif" }}
             >
               ¡Contraseña restablecida!
             </h3>
-            <p className="text-sm text-gray-400 max-w-xs">
-              Tu contraseña ha sido actualizada exitosamente. Ahora puedes iniciar sesión con tu nueva contraseña.
+            <p className="max-w-xs text-sm text-gray-400">
+              Tu contraseña ha sido actualizada exitosamente. Ahora puedes
+              iniciar sesión con tu nueva contraseña.
             </p>
           </div>
-          <Button
-            onClick={() => router.push("/login")}
-            className="bg-[#07162D] hover:bg-[#0d2240] text-white border-0 px-8 h-12 text-sm font-semibold rounded-xl"
-          >
-            Volver a Iniciar Sesión
-          </Button>
         </motion.div>
       )}
     </AnimatePresence>

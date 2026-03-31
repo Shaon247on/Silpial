@@ -28,7 +28,7 @@ function DashboardMockup() {
     <div className="w-full max-w-2xl mx-auto rounded-2xl overflow-hidden shadow-2xl border border-white/10">
       {/* Top navbar */}
       <div className="bg-white border-b border-gray-200 px-4 py-2.5 flex items-center justify-between">
-        <Logo/>
+        <Logo />
         <div className="flex items-center gap-2">
           <div className="w-5 h-5 rounded-full bg-gray-200" />
           <div
@@ -98,7 +98,8 @@ function DashboardMockup() {
                 ¡Bienvenido de vuelta, Silpia!
               </p>
               <p className="text-gray-400 mt-0.5" style={{ fontSize: 9 }}>
-                Administra tus documentos de licitación con claridad y cumplimiento normativo.
+                Administra tus documentos de licitación con claridad y
+                cumplimiento normativo.
               </p>
             </div>
             <div
@@ -316,7 +317,7 @@ export default function Hero() {
             className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight max-w-3xl"
             style={{ fontFamily: "'Georgia', serif", letterSpacing: "-0.02em" }}
           >
-            Prepare licitaciones que cumplan con las {" "}
+            Prepare licitaciones que cumplan con las{" "}
             <span className="relative inline-block">
               <span className="relative z-10">normas con confianza</span>
               <motion.span
@@ -334,7 +335,8 @@ export default function Hero() {
             variants={fadeUp}
             className="text-base sm:text-lg text-white/55 max-w-xl leading-relaxed"
           >
-            Redacción y revisión de procesos de contratación asistida por IA para administraciones españolas, con control humano completo.
+            Redacción y revisión de procesos de contratación asistida por IA
+            para administraciones españolas, con control humano completo.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -347,17 +349,13 @@ export default function Hero() {
                 size="lg"
                 className="bg-red-600 hover:bg-red-700 text-white border-0 px-8 py-3 text-sm font-semibold shadow-lg shadow-red-900/30 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
               >
-                Get Started
+                Empezar
               </Button>
             </Link>
             <Link href={"/how-it-works"}>
-            <Button
-            className="text-white"
-              variant="outline"
-              size="lg"
-            >
-              How it works
-            </Button>
+              <Button className="text-white" variant="outline" size="lg">
+                Cómo Funciona
+              </Button>
             </Link>
           </motion.div>
 
@@ -366,8 +364,8 @@ export default function Hero() {
             variants={fadeUp}
             className="text-xs text-white/30 mt-1 tracking-wide"
           >
-            Trusted by Spanish public administrations · No automatic changes ·
-            Full audit trail
+            Con la confianza de las administraciones públicas españolas · Sin
+            cambios automáticos ·
           </motion.p>
         </motion.div>
 

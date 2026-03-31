@@ -11,7 +11,9 @@ export const COOKIE = Object.freeze({
   access: isProd ? '__Host-access' : 'dev_access',
   refresh: isProd ? '__Host-refresh' : 'dev_refresh',
   session: isProd ? '__Host-session' : 'dev_session',
-  verification: "verification_token"
+  verification: "verification_token",
+  passReset: "pass_reset_token",
+  passwordResetVerified: "password_reset_verified",
 });
 
 export function cookieBaseOptions() {
