@@ -52,29 +52,21 @@ export default function LoginPage() {
   });
 
   const onSubmit = (data: LoginFormValues) => {
-    setServerError("");
+  setServerError("");
 
-    const formData = new FormData();
-    formData.append("email", data.email);
-    formData.append("password", data.password);
-    formData.append("rememberMe", String(!!data.rememberMe));
+  const formData = new FormData();
+  formData.append("email", data.email);
+  formData.append("password", data.password);
+  formData.append("rememberMe", String(!!data.rememberMe));
 
-    startTransition(async () => {
-      try {
-        await loginAction(formData);
-        // No router.push here.
-        // No setTimeout here.
-        // redirect() inside loginAction will handle navigation.
-      } catch (error) {
-        const message =
-          error instanceof Error
-            ? error.message
-            : "Unable to sign in. Please try again.";
+  startTransition(async () => {
+    const result = await loginAction(formData);
 
-        setServerError(message);
-      }
-    });
-  };
+    if (!result.success) {
+      setServerError(result.message);
+    }
+  });
+};
 
   return (
     <div>
