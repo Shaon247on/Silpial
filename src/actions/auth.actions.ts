@@ -7,7 +7,6 @@ import { env } from "@/lib/config/env";
 import { COOKIE, cookieBaseOptions } from "@/lib/auth/cookies";
 import { getJwtExpMs } from "@/lib/auth/jwt";
 import { signSession, type SessionUser } from "@/lib/auth/session";
-
 type LoginResponse = {
   success: true;
   access: string;
@@ -42,6 +41,8 @@ export async function loginAction(formData: FormData): Promise<LoginActionResult
       message: "Email and password are required.",
     };
   }
+
+  let redirectPath: string | null = null;
 
   try {
     const res = await axios.post<LoginResponse>(
@@ -97,24 +98,26 @@ export async function loginAction(formData: FormData): Promise<LoginActionResult
       maxAge: Math.min(refreshMaxAge, 60 * 60 * 24 * 14),
     });
 
-    redirect(sessionUser.is_admin ? "/admin" : "/dashboard");
+    redirectPath = sessionUser.is_admin ? "/admin" : "/dashboard";
   } catch (error) {
     if (axios.isAxiosError<BackendErrorResponse>(error)) {
-      const message =
-        error.response?.data?.error ||
-        "Unable to sign in. Please check your credentials.";
-
       return {
         success: false,
-        message,
+        message:
+          error.response?.data?.error ||
+          "Unable to sign in. Please check your credentials.",
       };
     }
+
+    console.error("loginAction unexpected error:", error);
 
     return {
       success: false,
       message: "Something went wrong. Please try again.",
     };
   }
+
+  redirect(redirectPath);
 }
 
 export async function logoutAction() {
