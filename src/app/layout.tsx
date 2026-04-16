@@ -3,6 +3,7 @@ import { Roboto, Poppins } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/shared/NavBar";
 import Footer from "@/components/shared/Footer";
+import { getSession } from "@/lib/auth/guards";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -20,17 +21,19 @@ export const metadata: Metadata = {
   description: "Prepare licitaciones que cumplan con las normas con confianza",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const data = await getSession()
+  console.log("user information:",data)
   return (
     <html lang="en">
       <body
         className={`${poppins.variable} ${roboto.variable} font-roboto antialiased`}
       >
-        <NavBar />
+        <NavBar user={data}/>
         {children}
         <Footer/>
       </body>

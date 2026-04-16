@@ -3,6 +3,7 @@ import DocumentsTable from "@/components/dashboard/DocumentsTable";
 import type { ApiDocument } from "@/types/uploadedDoc.type";
 import type { ApiDocument as Document } from "@/types/uploadedDoc.type";
 import { fetchDocuments } from "@/lib/services/uploadDoc.service";
+import { getSession } from "@/lib/auth/guards";
 
 // ── Map API shape → DocumentsTable shape ──────────────────────────────────────
 
@@ -28,10 +29,11 @@ export default async function DashboardPage() {
   // Fetch first page, show up to 5 most recent — no pagination needed here
   const { documents: apiDocs } = await fetchDocuments(undefined, undefined, 1);
   const recentDocuments        = apiDocs.slice(0, 5).map(toDocument);
+  const data = await getSession()
 
   return (
     <div className="max-w-480 mx-auto">
-      <PageHeader showCreateButton={true} />
+      <PageHeader showCreateButton={true} username={data?.user.full_name}/>
       <DocumentsTable documents={recentDocuments} title="Recent Documents" />
     </div>
   );

@@ -20,7 +20,7 @@ export default function DashboardLayout({
 
   return (
     <div className="min-h-screen bg-white">
-      <Navbar onMenuToggle={() => setSidebarOpen(true)} />
+      <Navbar onMenuToggle={() => setSidebarOpen(true)} is_admin={is_admin} />
 
       {/* Fixed desktop sidebar */}
       <div
@@ -48,9 +48,7 @@ export default function DashboardLayout({
       </div>
 
       {/* Main content */}
-      <main
-        className="bg-gray-50 p-3 md:p-8"
-      >
+      <main className="bg-gray-50 p-3 md:p-8">
         <div
           className="min-h-[calc(100vh-64px)]"
           style={{

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { LogOut, Menu } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "../ui/button";
@@ -9,11 +8,14 @@ import Link from "next/link";
 import { logoutAction } from "@/actions/auth.actions";
 import Logo from "../elements/Logo";
 
+
+
 interface NavbarProps {
+  is_admin: boolean;
   onMenuToggle?: () => void;
 }
 
-export default function Navbar({ onMenuToggle }: NavbarProps) {
+export default function Navbar({ onMenuToggle, is_admin }: NavbarProps) {
   return (
     <motion.header
       initial={{ y: -20, opacity: 0 }}
@@ -31,12 +33,18 @@ export default function Navbar({ onMenuToggle }: NavbarProps) {
           <Menu className="w-5 h-5 text-gray-600" />
         </button>
 
-        <Logo/>
+        <Logo />
       </div>
 
       {/* Right: User + Logout */}
       <div className="flex items-center gap-3">
-        <Link href={"/dashboard/profile"}>
+        <Link
+          href={
+            is_admin
+              ? "/admin/profile"
+              : "/dashboard/profile"
+          }
+        >
           <Avatar className="cursor-pointer">
             <AvatarImage src="https://github.com/shadcn.png" />
             <AvatarFallback>CN</AvatarFallback>
@@ -44,7 +52,7 @@ export default function Navbar({ onMenuToggle }: NavbarProps) {
         </Link>
         <Link href={"/"}>
           <Button
-          onClick={logoutAction}
+            onClick={logoutAction}
             variant={"ghost"}
             className="flex items-center gap-2 text-sm font-medium text-[#07172D] hover:text-red-400 duration-300 transition-colors"
           >

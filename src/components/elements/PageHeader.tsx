@@ -26,7 +26,7 @@ export default function PageHeader({
     >
       <div>
         <h1 className="text-2xl font-bold text-[#07172D] tracking-tight">
-          {title ?? `Bienvenido de vuelta, ${username}`}
+          {title ?? `Bienvenido de vuelta ${username}`}
         </h1>
         <p className="mt-1 text-sm text-[#4A5565]">{subtitle}</p>
       </div>
