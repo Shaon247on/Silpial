@@ -29,6 +29,7 @@ export async function updateProfileAction(
       { headers: { "Content-Type": "multipart/form-data" } },
     );
     store.set("dev_access", res.data.access);
+    refresh()
     revalidatePath("/dashboard/settings");
     return { success: true, data: res.data.user };
   } catch (err: unknown) {
