@@ -9,7 +9,7 @@ export default async function AppLayout({
   const session = await requireAuth();
 
   return (
-    <DashboardLayout is_admin={session.user.is_admin}>
+    <DashboardLayout is_admin={session.user.is_admin} image={session.user.profile_pic}>
       {children}
     </DashboardLayout>
   );

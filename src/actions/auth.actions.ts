@@ -84,6 +84,7 @@ export async function loginAction(formData: FormData): Promise<LoginActionResult
       email: user.email,
       full_name: user.full_name ?? "",
       is_admin: !!user.is_admin,
+      profile_pic: user.profile_pic
     };
 
     const sessionJwt = await signSession(

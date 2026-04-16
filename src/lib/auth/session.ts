@@ -7,6 +7,7 @@ export type SessionUser = {
   email: string;
   full_name: string;
   is_admin: boolean;
+  profile_pic: string;
 };
 
 export type SessionPayload = {

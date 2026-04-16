@@ -7,6 +7,7 @@ import Navbar from "./Navbar";
 interface DashboardLayoutProps {
   children: React.ReactNode;
   is_admin: boolean;
+  image: string;
 }
 
 const SIDEBAR_WIDTH = 224; // w-56
@@ -15,12 +16,13 @@ const NAVBAR_HEIGHT = 64; // h-16
 export default function DashboardLayout({
   children,
   is_admin,
+  image
 }: DashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-white">
-      <Navbar onMenuToggle={() => setSidebarOpen(true)} is_admin={is_admin} />
+      <Navbar onMenuToggle={() => setSidebarOpen(true)} is_admin={is_admin} image={image}/>
 
       {/* Fixed desktop sidebar */}
       <div

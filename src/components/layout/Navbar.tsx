@@ -8,14 +8,17 @@ import Link from "next/link";
 import { logoutAction } from "@/actions/auth.actions";
 import Logo from "../elements/Logo";
 
-
-
 interface NavbarProps {
   is_admin: boolean;
+  image: string;
   onMenuToggle?: () => void;
 }
 
-export default function Navbar({ onMenuToggle, is_admin }: NavbarProps) {
+export default function Navbar({
+  onMenuToggle,
+  is_admin,
+  image = "",
+}: NavbarProps) {
   return (
     <motion.header
       initial={{ y: -20, opacity: 0 }}
@@ -38,15 +41,12 @@ export default function Navbar({ onMenuToggle, is_admin }: NavbarProps) {
 
       {/* Right: User + Logout */}
       <div className="flex items-center gap-3">
-        <Link
-          href={
-            is_admin
-              ? "/admin/profile"
-              : "/dashboard/profile"
-          }
-        >
+        <Link href={is_admin ? "/admin/profile" : "/dashboard/profile"}>
           <Avatar className="cursor-pointer">
-            <AvatarImage src="https://github.com/shadcn.png" />
+            {/* <AvatarImage src="https://github.com/shadcn.png" /> */}
+            <AvatarImage
+              src={image === "" ? "https://github.com/shadcn.png" : image}
+            />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
         </Link>
