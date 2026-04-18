@@ -31,7 +31,9 @@ function secondsUntil(msEpoch: number): number {
   return Math.max(0, Math.floor((msEpoch - Date.now()) / 1000));
 }
 
-export async function loginAction(formData: FormData): Promise<LoginActionResult> {
+export async function loginAction(
+  formData: FormData,
+): Promise<LoginActionResult> {
   const email = String(formData.get("email") ?? "").trim();
   const password = String(formData.get("password") ?? "");
 
@@ -51,9 +53,10 @@ export async function loginAction(formData: FormData): Promise<LoginActionResult
       {
         headers: { "Content-Type": "application/json" },
         timeout: 15_000,
-      }
+      },
     );
 
+    console.log("login response:", res.data);
     const { access, refresh, user } = res.data;
     const store = await cookies();
 
@@ -84,12 +87,12 @@ export async function loginAction(formData: FormData): Promise<LoginActionResult
       email: user.email,
       full_name: user.full_name ?? "",
       is_admin: !!user.is_admin,
-      profile_pic: user.profile_pic
+      profile_pic: user.profile_pic,
     };
 
     const sessionJwt = await signSession(
       { user: sessionUser },
-      Math.min(refreshMaxAge, 60 * 60 * 24 * 14)
+      Math.min(refreshMaxAge, 60 * 60 * 24 * 14),
     );
 
     store.set({
@@ -101,6 +104,7 @@ export async function loginAction(formData: FormData): Promise<LoginActionResult
 
     redirectPath = sessionUser.is_admin ? "/admin" : "/dashboard";
   } catch (error) {
+    console.log("loginAction unexpected error:", error);
     if (axios.isAxiosError<BackendErrorResponse>(error)) {
       return {
         success: false,
@@ -109,8 +113,6 @@ export async function loginAction(formData: FormData): Promise<LoginActionResult
           "Unable to sign in. Please check your credentials.",
       };
     }
-
-    console.error("loginAction unexpected error:", error);
 
     return {
       success: false,

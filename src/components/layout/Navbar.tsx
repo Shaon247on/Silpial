@@ -19,6 +19,8 @@ export default function Navbar({
   is_admin,
   image = "",
 }: NavbarProps) {
+
+  console.log("the image", image)
   return (
     <motion.header
       initial={{ y: -20, opacity: 0 }}

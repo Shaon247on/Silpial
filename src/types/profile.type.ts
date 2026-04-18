@@ -3,7 +3,7 @@ export interface UserProfile {
   full_name: string;
   email: string;
   username: string;
-  profile_pic_url: string;
+  profile_pic: string;
   date_joined: string;
   is_admin: boolean;
 }

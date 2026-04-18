@@ -142,6 +142,7 @@ export default function RegisterPage() {
     formData.append("email", data.email);
     formData.append("password", data.password);
     formData.append("password_confirm", data.confirmPassword);
+    formData.append("full_name", data.name);
 
     startTransition(async () => {
       const result = await registerAction(formData);

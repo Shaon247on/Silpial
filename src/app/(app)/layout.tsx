@@ -8,6 +8,8 @@ export default async function AppLayout({
 }) {
   const session = await requireAuth();
 
+  console.log("the session:", session)
+
   return (
     <DashboardLayout is_admin={session.user.is_admin} image={session.user.profile_pic}>
       {children}

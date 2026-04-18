@@ -329,7 +329,7 @@ export default function ProfileClient({ profile }: ProfileClientProps) {
         >
           {/* Avatar upload */}
           <AvatarUpload
-            currentUrl={currentProfile?.profile_pic_url}
+            currentUrl={currentProfile?.profile_pic}
             fullName={watchedName || currentProfile?.full_name}
             onFileChange={setAvatarFile}
           />
